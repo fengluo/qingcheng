@@ -8,7 +8,8 @@
   module.exports = {
     el: '#app',
     data: {
-      view: 'home'
+      view: 'home',
+      params: {}
     },
     components: {
       'home': require('./views/home.vue')
