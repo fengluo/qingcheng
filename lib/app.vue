@@ -1,6 +1,9 @@
 <template>
-  <h1>App</h1>
-  <component is="{{view}}">
+  <component is="{{view}}"
+    params="{{params}}"
+    keep-alive
+    v-transition
+    transition-mode="out-in">
   </component>
 </template>
 
@@ -12,7 +15,10 @@
       params: {}
     },
     components: {
-      'home': require('./views/home.vue')
+      'home': require('./views/home.vue'),
+      'cafe': require('./views/cafe.vue'),
+      'topic': require('./views/topic.vue'),
+      'user': require('./views/user.vue'),
     }
   }
 </script>
