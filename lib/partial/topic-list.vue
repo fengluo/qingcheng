@@ -13,17 +13,15 @@
     </thead>
     <tbody>
       <tr v-repeat="topics" class="topic-item" id="topic-{{id}}" v-on="mouseenter: enter(this, cafe), mouseleave: leave(this)">
-        <td class="column-avatar" v-el="avatar">
-          <a href="/u/{{user.username}}">
-            {{{ user | avatar_html }}}
-          </a>
+        <td class="column-avatar" v-el="border">
+          <avatar user="{{user}}"></avatar>
         </td>
         <td class="column-title">
           <a class="topic-title" href="/t/{{id}}">{{title}}</a>
           <div class="explain">
             @<a href="/u/{{user.username}}">{{user.username}}</a>
             <span v-if="cafe"> at <a href="/c/{{cafe.slug}}">{{ cafe.name }}</a></span>
-            <time>{{ created_at }}</time>
+            <time datetime="{{ created_at }}">{{ created_at | timeago }}</time>
           </div>
         </td>
         <td class="column-count">10.3k<span class="explain">views</span></td>
@@ -47,12 +45,15 @@
     methods: {
       enter: function(vm, cafe) {
         if (cafe && cafe.background_color) {
-          vm.$$.avatar.style.borderColor = cafe.background_color;
+          vm.$$.border.style.borderColor = cafe.background_color;
         }
       },
       leave: function(vm) {
-        vm.$$.avatar.style.borderColor = 'transparent';
+        vm.$$.border.style.borderColor = 'transparent';
       }
+    },
+    components: {
+      'avatar': require('./avatar.vue')
     }
   }
 </script>
@@ -105,19 +106,9 @@
     transition: border-color .2s ease-out;
   }
   .topic-item .avatar {
-    display: inline-block;
     width: 48px;
     height: 48px;
-    background-color: #121211;
-    color: white;
-    text-align: center;
     line-height: 48px;
-    font-size: 24px;
-    border-radius: 3px;
-    vertical-align: middle;
-  }
-  .topic-item .avatar:hover {
-    opacity: 0.8;
   }
   .topic-item .topic-title {
     text-decoration: none;
@@ -128,8 +119,12 @@
   .topic-item .topic-title:hover {
     color: #010100;
   }
+  .topic-item .column-title {
+    padding-left: 0;
+  }
   .topic-item .column-count {
     width: 48px;
+    color: #454544;
     text-align: center;
   }
 </style>

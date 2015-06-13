@@ -55,14 +55,10 @@
         {
           id: 1,
           title: 'Hello world, this is a test',
-          cafe: {
-            slug: 'good',
-            name: 'Good',
-            background_color: 'yellow'
-          },
+          created_at: '2015-06-12T09:08:23Z',
           user: {
-            username: 'hsiaoming',
-            avatar_url: ''
+            username: 'lizzy',
+            avatar_url: 'https://avatars1.githubusercontent.com/u/1206493?v=3&s=96'
           }
         }
         ]
