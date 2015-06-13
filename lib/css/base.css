@@ -1,0 +1,135 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: #f7f8f9;
+  font: normal 400 16px/1.5 "Source Sans Pro", "Helvetica Neue", "Arial", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+}
+a {
+  color: #42B983;
+}
+
+nav a {
+  display: inline-block;
+  text-decoration: none;
+  transition: box-shadow .2s ease-out;
+}
+nav a:hover {
+  box-shadow: 0 -3px 0 #4bd094 inset;
+}
+
+/* colors */
+.green {
+  color: #42B983;
+}
+.red {
+  color: #FF4444;
+}
+.yellow {
+  color: #FFDC00;
+}
+/* basic classes */
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container:after, .clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* ui */
+a.button {
+  display: inline-block;
+  background-color: #42b983;
+  text-decoration: none;
+  padding: 0 24px;
+  color: white;
+  font: normal 500 13px/32px "Lucida Grande", "Helvetica Neue", "Arial", sans-serif;
+  border-radius: 32px;
+}
+a.button.red {
+  background-color: #FF4444;
+}
+a.button.yellow {
+  background-color: #FFDC00;
+}
+a.button:hover {
+  opacity: 0.8;
+}
+
+/* layout: top-nav */
+.top-nav {
+  background-color: white;
+  box-shadow: 0 1px 0 rgba(100, 100, 100, 0.2);
+}
+.site-nav {
+  float: left;
+}
+.site-nav a {
+  color: #8B909A;
+  font: normal normal 14px/64px "Optima", "Helvetica Neue", "Arial", sans-serif;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.site-account {
+  float: right;
+  vertical-align: middle;
+}
+.site-account .button {
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+/* layout: header */
+.header-intro {
+  padding: 80px 0 40px;
+  background-color: #FF1558;
+  color: white;
+  background: rgba(0, 0, 0, 0.8) no-repeat center center;
+  background-size: cover;
+  background-image: url(https://dn-yuehu.qbox.me/cover/editors-picks/q8Up172j5piiqQvu.jpg/cover);
+}
+.header-intro h2 {
+  margin: 0;
+  font-size: 24px;
+}
+.header-intro p {
+  margin: 0;
+}
+.header-nav {
+  background-color: white;
+  box-shadow: 0 1px 0 rgba(100, 100, 100, 0.2), 0 1px 0 rgba(100, 100, 100, 0.08) inset;
+}
+.header-nav nav {
+  float: left;
+}
+.header-nav .header-actions {
+  float: right;
+  margin-top: 8px;
+}
+.header-nav nav a {
+  color: #656465;
+  padding: 12px;
+}
+
+/* layout: body */
+.body {
+  padding: 20px 0;
+}
+.main-view {
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(100, 100, 100, 0.2);
+}
+.split-view .main-view {
+  float: left;
+  width: 70%;
+}
+.topic-list {
+  border-collapse: collapse;
+  width: 100%;
+}

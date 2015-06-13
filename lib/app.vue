@@ -1,4 +1,15 @@
 <template>
+  <div class="top-nav">
+    <div class="container">
+      <nav class="site-nav">
+        <a class="brand" href="/">ZERQU</a>
+      </nav>
+      <div class="site-account">
+        <a href="/login" class="button">Log in</a>
+      </div>
+    </div>
+  </div>
+
   <component is="{{view}}"
     params="{{params}}"
     keep-alive
@@ -15,10 +26,12 @@
       params: {}
     },
     components: {
-      'home': require('./views/home.vue'),
-      'cafe': require('./views/cafe.vue'),
-      'topic': require('./views/topic.vue'),
-      'user': require('./views/user.vue'),
+      'home': require('./home.vue'),
+      'cafe': require('./cafe.vue'),
+      'topic': require('./topic.vue'),
+      'user': require('./user.vue'),
     }
   }
 </script>
+
+<style src="css/base.css"></style>
