@@ -1,3 +1,9 @@
+:root {
+  --yellow: #FFDC00;
+  --green: #42B983;
+  --red: #FF4444;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -20,16 +26,6 @@ nav a:hover {
   box-shadow: 0 -3px 0 #4bd094 inset;
 }
 
-/* colors */
-.green {
-  color: #42B983;
-}
-.red {
-  color: #FF4444;
-}
-.yellow {
-  color: #FFDC00;
-}
 /* basic classes */
 .container {
   max-width: 1100px;
@@ -50,7 +46,18 @@ nav a:hover {
 .site-nav {
   float: left;
 }
-.site-nav a {
+.site-nav .site-logo {
+  margin-top: 10px;
+  transform: scale(0.64);
+}
+.site-nav .site-logo:hover {
+  opacity: 0.76;
+}
+.site-nav nav, .site-nav .site-logo {
+  display: inline-block;
+  float: left;
+}
+.site-nav nav a {
   color: #8B909A;
   font: normal normal 14px/64px "Optima", "Helvetica Neue", "Arial", sans-serif;
   padding-left: 12px;

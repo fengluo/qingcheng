@@ -1,9 +1,19 @@
 <template>
   <div class="top-nav">
     <div class="container">
-      <nav class="site-nav">
-        <a class="brand" href="/">ZERQU</a>
-      </nav>
+      <div class="site-nav clearfix">
+        <a class="site-logo" href="/">
+          <div class="logo" v-if="!site.logo">
+            <div><span class="left-yellow"></span><span class="right-green"></span></div>
+            <div><span class="full-green"></span></div>
+            <div><span class="left-green"></span><span class="right-red"></span></div>
+          </div>
+        </a>
+        <nav>
+          <a class="brand" href="/">Topics</a>
+        </nav>
+      </div>
+
       <div class="site-account">
         <a href="/login" class="button">Log in</a>
       </div>
@@ -11,11 +21,11 @@
   </div>
 
   <component is="{{view}}"
-    params="{{params}}"
-    keep-alive
-    v-transition
-    transition-mode="out-in">
-  </component>
+  params="{{params}}"
+  keep-alive
+  v-transition
+  transition-mode="out-in">
+</component>
 </template>
 
 <script>
@@ -23,6 +33,7 @@
     el: '#app',
     data: {
       view: 'home',
+      site: {},
       params: {}
     },
     components: {

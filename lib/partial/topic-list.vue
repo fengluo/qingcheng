@@ -14,14 +14,14 @@
     <tbody>
       <tr v-repeat="topics" class="topic-item" id="topic-{{id}}" v-on="mouseenter: enter(this, cafe), mouseleave: leave(this)" track-by="id">
         <td class="column-avatar" v-el="border">
-          <avatar user="{{user}}"></avatar>
+          <user-avatar user="{{user}}"></user-avatar>
         </td>
         <td class="column-title">
           <a class="topic-title" href="/t/{{id}}">{{title}}</a>
           <div class="explain">
-            @<a href="/u/{{user.username}}">{{user.username}}</a>
-            <span v-if="cafe"> at <a href="/c/{{cafe.slug}}">{{ cafe.name }}</a></span>
             <time datetime="{{ created_at }}">{{ created_at | timeago }}</time>
+            by <a href="/u/{{user.username}}">{{user.username}}</a>
+            <span v-if="cafe"> at <a href="/c/{{cafe.slug}}">{{ cafe.name }}</a></span>
           </div>
         </td>
         <td class="column-count">10.3k<span class="explain">views</span></td>
@@ -53,7 +53,7 @@
       }
     },
     components: {
-      'avatar': require('./avatar.vue')
+      'user-avatar': require('./user-avatar.vue')
     }
   }
 </script>
@@ -92,6 +92,8 @@
   }
   .topic-item .explain a {
     color: #999;
+    text-decoration: none;
+    font-weight: 600;
     font-size: 13px;
   }
   .topic-item .explain a:hover {
@@ -112,15 +114,19 @@
   }
   .topic-item .topic-title {
     text-decoration: none;
-    color: #343433;
-    line-height: 1.8;
+    color: #565655;
+    line-height: 1;
     font-size: 18px;
+    text-overflow: ellipsis;
   }
   .topic-item .topic-title:hover {
     color: #010100;
   }
   .topic-item .column-title {
     padding-left: 0;
+  }
+  .topic-item .column-title .explain {
+    margin-top: 3px;
   }
   .topic-item .column-count {
     width: 48px;

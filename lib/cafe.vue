@@ -3,7 +3,7 @@
   <div class="body">
     <div class="split-view container">
       <div class="main-view">
-        <loader v-if="!topics.length"></loader>
+        <logo-loading v-if="!topics.length"></logo-loading>
         <topic-list topics="{{ topics }}" v-if="topics.length"></topic-list>
       </div>
     </div>
@@ -30,7 +30,7 @@
 
         me.topics = [{
           id: 2,
-          title: 'What can I do with ZERQU',
+          title: 'What can I do with ZERQU, What can I do with ZERQU, What can I do with ZERQU',
           cafe: {
             slug: 'good',
             name: 'Good',
@@ -51,13 +51,13 @@
           }
         }];
 
-      }, 3000);
+      }, 8000);
 
     },
     components: {
       'topic-list': require('./partial/topic-list.vue'),
       'cafe-header': require('./partial/cafe-header.vue'),
-      'loader': require("./partial/loader.vue")
+      'logo-loading': require("./partial/logo-loading.vue")
     }
   };
 </script>
