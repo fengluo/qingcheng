@@ -22,7 +22,7 @@
       }
     },
     components: {
-      'cafe-header': require('./partial/cafe-header.vue')
+      'cafe-header': require('./components/cafe-header.vue')
     }
   };
 </script>

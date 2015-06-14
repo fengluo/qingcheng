@@ -55,9 +55,9 @@
 
     },
     components: {
-      'topic-list': require('./partial/topic-list.vue'),
-      'cafe-header': require('./partial/cafe-header.vue'),
-      'logo-loading': require("./partial/logo-loading.vue")
+      'topic-list': require('./components/topic-list.vue'),
+      'cafe-header': require('./components/cafe-header.vue'),
+      'logo-loading': require("./components/logo-loading.vue")
     }
   };
 </script>
