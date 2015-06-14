@@ -1,23 +1,5 @@
 <template>
-  <div class="header">
-    <div class="header-intro">
-      <div class="container">
-        <h2>{{ user.username }}</h2>
-        <p>{{ user.description }}</p>
-      </div>
-    </div>
-    <div class="header-nav">
-      <div class="container">
-        <nav>
-          <a href="/u/{{user.username}}/topics">Topics</a>
-          <a href="/u/{{user.username}}/likes">Likes</a>
-          <a href="/u/{{user.username}}/replies">Replies</a>
-          <a href="/u/{{user.username}}/cafes">Cafes</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-
+  <cafe-header></cafe-header>
   <div class="body">
     <div class="split-view container">
       <div class="main-view">
@@ -38,6 +20,9 @@
           description: 'Love its people, but never trust its government.'
         }
       }
+    },
+    components: {
+      'cafe-header': require('./partial/cafe-header.vue')
     }
   };
 </script>

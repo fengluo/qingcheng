@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-repeat="topics" class="topic-item" id="topic-{{id}}" v-on="mouseenter: enter(this, cafe), mouseleave: leave(this)">
+      <tr v-repeat="topics" class="topic-item" id="topic-{{id}}" v-on="mouseenter: enter(this, cafe), mouseleave: leave(this)" track-by="id">
         <td class="column-avatar" v-el="border">
           <avatar user="{{user}}"></avatar>
         </td>

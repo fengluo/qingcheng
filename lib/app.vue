@@ -35,3 +35,4 @@
 </script>
 
 <style src="css/base.css"></style>
+<style src="css/ui.css"></style>

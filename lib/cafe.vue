@@ -1,30 +1,10 @@
 <template>
-  <div class="header">
-    <div class="header-intro">
-      <div class="container">
-        <h2>{{ title }}</h2>
-        <p>{{ description }}</p>
-      </div>
-    </div>
-    <div class="header-nav">
-      <div class="container">
-        <nav>
-          <a href="/c/1">Topics</a>
-          <a href="/c/1?sort=new">New</a>
-          <a href="/c/1">Members</a>
-        </nav>
-        <div class="header-actions">
-          <a class="button" href="#">Follow</a>
-          <a class="button" href="#">New Topic</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <cafe-header cafe="{{ cafe }}"></cafe-header>
   <div class="body">
     <div class="split-view container">
       <div class="main-view">
-        <topic-list topics="{{ topics }}"></topic-list>
+        <loader v-if="!topics.length"></loader>
+        <topic-list topics="{{ topics }}" v-if="topics.length"></topic-list>
       </div>
     </div>
   </div>
@@ -36,10 +16,19 @@
     props: ['params'],
     data: function() {
       return {
-        title: "A Cafe",
-        description: "Hello Cafe. Fetch from API",
-        topics: [
-        {
+        cafe: {
+          title: "A Cafe",
+          description: "Hello Cafe. Fetch from API"
+        },
+        topics: []
+      }
+    },
+    compiled: function() {
+      var me = this;
+
+      setTimeout(function() {
+
+        me.topics = [{
           id: 2,
           title: 'What can I do with ZERQU',
           cafe: {
@@ -60,12 +49,15 @@
             username: 'lizzy',
             avatar_url: 'https://avatars1.githubusercontent.com/u/1206493?v=3&s=96'
           }
-        }
-        ]
-      }
+        }];
+
+      }, 3000);
+
     },
     components: {
-      'topic-list': require('./partial/topic-list.vue')
+      'topic-list': require('./partial/topic-list.vue'),
+      'cafe-header': require('./partial/cafe-header.vue'),
+      'loader': require("./partial/loader.vue")
     }
   };
 </script>
