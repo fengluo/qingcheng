@@ -1,0 +1,86 @@
+/* ui */
+a.button {
+  display: inline-block;
+  background-color: #42b983;
+  text-decoration: none;
+  padding: 0 24px;
+  color: white;
+  font: normal 500 13px/32px "Lucida Grande", "Helvetica Neue", "Arial", sans-serif;
+  border-radius: 32px;
+}
+a.button.red {
+  background-color: #FF4444;
+}
+a.button.yellow {
+  background-color: #FFDC00;
+}
+a.button:hover {
+  opacity: 0.8;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.2;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+/* loader */
+.loader {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 60px 0;
+  width: 46px;
+  line-height: 1;
+}
+.loader div {
+  line-height: 1;
+  height: 12px;
+  margin-bottom: 4px;
+}
+.loader .loader-2 {
+  height: 8px;
+}
+.loader span {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  opacity: 0.2;
+  animation: loading 1.8s cubic-bezier(.2,.68,.18,1.08) infinite;
+  animation-fill-mode: both;
+}
+.loader .left-yellow {
+  width: 24px;
+  margin-right: 2px;
+  background-color: #FFDC00;
+  border-radius: 6px 0 0 6px;
+}
+.loader .right-green {
+  width: 16px;
+  background-color: #42B983;
+  border-radius: 0 6px 6px 0;
+  animation-delay: .2s;
+}
+.loader .full-green {
+  width: 42px;
+  background-color: #42B983;
+  border-radius: 4px;
+  animation-delay: .4s;
+}
+.loader .left-green {
+  width: 18px;
+  margin-right: 2px;
+  background-color: #42B983;
+  border-radius: 6px 0 0 6px;
+  animation-delay: .6s;
+}
+.loader .right-red {
+  width: 22px;
+  background-color: #FF4444;
+  border-radius: 0 6px 6px 0;
+  animation-delay: .8s;
+}

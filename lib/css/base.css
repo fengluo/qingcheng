@@ -42,26 +42,6 @@ nav a:hover {
   clear: both;
 }
 
-/* ui */
-a.button {
-  display: inline-block;
-  background-color: #42b983;
-  text-decoration: none;
-  padding: 0 24px;
-  color: white;
-  font: normal 500 13px/32px "Lucida Grande", "Helvetica Neue", "Arial", sans-serif;
-  border-radius: 32px;
-}
-a.button.red {
-  background-color: #FF4444;
-}
-a.button.yellow {
-  background-color: #FFDC00;
-}
-a.button:hover {
-  opacity: 0.8;
-}
-
 /* layout: top-nav */
 .top-nav {
   background-color: white;
@@ -121,15 +101,13 @@ a.button:hover {
 .body {
   padding: 20px 0;
 }
-.main-view {
-  background-color: white;
-  box-shadow: 0 1px 1px rgba(100, 100, 100, 0.2);
-}
 .split-view .main-view {
   float: left;
   width: 70%;
 }
 .topic-list {
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(100, 100, 100, 0.2);
   border-collapse: collapse;
   width: 100%;
 }
