@@ -3,8 +3,19 @@
   <div class="body">
     <div class="split-view container">
       <div class="main-view">
-        <logo-loading v-if="!topics.length"></logo-loading>
-        <topic-list topics="{{ topics }}" v-if="topics.length"></topic-list>
+        <div class="topic-list">
+          <div class="topic-filters clearfix">
+            <div class="topic-order-by">
+              <select>
+                <option>Newest</option>
+              </select>
+            </div>
+          </div>
+          <logo-loading v-if="!topics.length"></logo-loading>
+          <ul v-if="topics.length">
+            <topic-item v-repeat="topic: topics"></topic-item>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -30,7 +41,7 @@
 
         me.topics = [{
           id: 2,
-          title: 'What can I do with ZERQU, What can I do with ZERQU, What can I do with ZERQU',
+          title: 'What can I do with ZERQU, What can I do with ZERQU, What can I do with ZERQU What can I do with ZERQU, What can I do with ZERQU, What can I do with ZERQU',
           cafe: {
             slug: 'good',
             name: 'Good',
@@ -51,11 +62,11 @@
           }
         }];
 
-      }, 8000);
+      }, 10);
 
     },
     components: {
-      'topic-list': require('./components/topic-list.vue'),
+      'topic-item': require('./components/topic-item.vue'),
       'cafe-header': require('./components/cafe-header.vue'),
       'logo-loading': require("./components/logo-loading.vue")
     }

@@ -110,11 +110,21 @@ nav a:hover {
 }
 .split-view .main-view {
   float: left;
-  width: 70%;
+  width: 760px;
 }
+
+/* topic list */
 .topic-list {
   background-color: white;
   box-shadow: 0 1px 1px rgba(100, 100, 100, 0.2);
   border-collapse: collapse;
   width: 100%;
+}
+.topic-list > ul {
+  padding: 0;
+  margin: 0;
+}
+.topic-list .topic-filters {
+  padding: 10px 10px 14px 12px;
+  border-bottom: 1px solid #eee;
 }
