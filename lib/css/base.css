@@ -112,19 +112,36 @@ nav a:hover {
   float: left;
   width: 760px;
 }
+.split-view .sidebar-view {
+  float: right;
+  width: 320px;
+}
 
-/* topic list */
-.topic-list {
+.box-container {
   background-color: white;
   box-shadow: 0 1px 1px rgba(100, 100, 100, 0.2);
-  border-collapse: collapse;
   width: 100%;
 }
+
+/* topic list */
 .topic-list > ul {
   padding: 0;
   margin: 0;
 }
 .topic-list .topic-filters {
   padding: 10px 10px 14px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* widget */
+.widget h2, .widget h3, .widget h4 {
+  margin: 0;
+}
+.widget-title, .widget-content {
+  margin: 0;
+  padding: 10px;
+}
+.widget-title {
+  font-size: 14px;
   border-bottom: 1px solid #eee;
 }

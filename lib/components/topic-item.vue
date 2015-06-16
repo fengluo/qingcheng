@@ -1,6 +1,6 @@
 <template>
-  <li id="{{ topic.id }}" class="topic-item clearfix">
-    <span class="cafe-color" style="background-color: {{ cafe.background_color }}"></span>
+  <li id="t-{{ topic.id }}" class="topic-item clearfix">
+    <span v-if="cafe" class="cafe-color" style="background-color: {{ cafe.background_color }}"></span>
     <span class="user-avatar">
       <user-avatar user="{{user}}"></user-avatar>
     </span>
@@ -13,11 +13,11 @@
       </div>
     </div>
     <div class="topic-counts">
-      <div class="view-count">
-        10.3k<span class="explain">views</span>
+      <div class="count-wrap">
+        {{ topic.like_count }}<span class="explain">likes</span>
       </div>
-      <div class="reply-count">
-        34<span class="explain">replies</span>
+      <div class="count-wrap">
+        {{ topic.comment_count }}<span class="explain">replies</span>
       </div>
     </div>
   </li>
@@ -94,7 +94,7 @@
     padding: 0 10px;
     color: #454544;
   }
-  .topic-counts .view-count, .topic-counts .reply-count {
+  .topic-counts .count-wrap {
     display: inline-block;
     text-align: center;
     width: 48px;

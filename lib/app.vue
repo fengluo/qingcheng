@@ -10,7 +10,8 @@
           </div>
         </a>
         <nav>
-          <a class="brand" href="/">Topics</a>
+          <a class="brand" href="/c/site">Site</a>
+          <a class="brand" href="/c/about">About</a>
         </nav>
       </div>
 

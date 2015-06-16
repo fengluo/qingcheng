@@ -10,8 +10,8 @@
       <div class="container">
         <nav>
           <a href="/">Overview</a>
-          <a href="/t/1">Topics</a>
-          <a href="/c/1">Cafes</a>
+          <a href="/c/site">Topics</a>
+          <a href="/c/about">Cafes</a>
         </nav>
       </div>
     </div>
