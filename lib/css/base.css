@@ -74,12 +74,15 @@ nav a:hover {
 
 /* layout: header */
 .header-intro {
-  padding: 80px 0 40px;
+  height: 200px;
   background-color: #FF1558;
   color: white;
   background: rgba(0, 0, 0, 0.8) no-repeat center center;
   background-size: cover;
   background-image: url(https://dn-yuehu.qbox.me/cover/editors-picks/q8Up172j5piiqQvu.jpg/cover);
+}
+.header-intro .container {
+  padding-top: 100px;
 }
 .header-intro h2 {
   margin: 0;
