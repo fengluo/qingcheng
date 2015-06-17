@@ -41,7 +41,7 @@
 <script>
   module.exports = {
     replace: true,
-    props: ['params'],
+    props: ['params', 'site'],
     data: function() {
       return {
         cafe: {},
@@ -68,6 +68,7 @@
       }
     },
     compiled: function() {
+      document.title = this.site.name;
       this.fetchTopics();
     },
     components: {

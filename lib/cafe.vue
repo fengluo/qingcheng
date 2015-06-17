@@ -40,7 +40,7 @@
 
   module.exports = {
     replace: true,
-    props: ['params'],
+    props: ['params', 'site'],
     data: function() {
       return {
         cafe: {},
@@ -70,7 +70,7 @@
       fetchCafe: function() {
         api.cafe(this.params.slug, function(resp) {
           this.cafe = resp;
-          document.title = this.cafe.name;
+          document.title = this.site.name + ' — ' + this.cafe.name;
         }.bind(this));
       },
       fetchTopics: function(page) {

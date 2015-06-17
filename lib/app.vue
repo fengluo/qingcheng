@@ -22,7 +22,7 @@
   </div>
 
   <component is="{{view}}"
-  params="{{params}}"
+  params="{{params}}" site="{{site}}"
   v-transition
   transition-mode="out-in">
 </component>
