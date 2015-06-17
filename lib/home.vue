@@ -16,11 +16,63 @@
       </div>
     </div>
   </div>
+
+  <div class="body">
+    <div class="split-view container">
+      <div class="main-view">
+        <div class="topic-list box-container">
+          <div class="topic-filters clearfix">
+            <div class="topic-order-by">
+              <select>
+                <option>Newest</option>
+              </select>
+            </div>
+          </div>
+          <logo-loading v-if="!topics.length"></logo-loading>
+          <ul v-if="topics.length">
+            <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
   module.exports = {
     replace: true,
-    props: ['params']
+    props: ['params'],
+    data: function() {
+      return {
+        cafe: {},
+        cursor: null,
+        topics: [],
+        topicsUrl: '/api/topics/timeline'
+      }
+    },
+    methods: {
+      clean: function() {
+        this.topics = [];
+        this.cursor = null;
+      },
+      fetchTopics: function(cursor) {
+        cursor = cursor || this.params.cursor;
+        var url = this.topicsUrl;
+        if (cursor) {
+          url += '?cursor=' + cursor;
+        }
+        this.$http.get(url, function(resp) {
+          this.cursor = resp.cursor;
+          this.topics = this.topics.concat(resp.data);
+        });
+      }
+    },
+    compiled: function() {
+      this.fetchTopics();
+    },
+    components: {
+      'topic-item': require('./components/topic-item.vue'),
+      'logo-loading': require("./components/logo-loading.vue")
+    }
   };
 </script>

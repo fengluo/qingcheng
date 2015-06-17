@@ -1,6 +1,6 @@
 <template>
   <li id="t-{{ topic.id }}" class="topic-item clearfix">
-    <span v-if="cafe" class="cafe-color" style="background-color: {{ cafe.background_color }}"></span>
+    <span v-if="cafe" class="cafe-color" style="background-color: {{ cafe.style.base_color }}"></span>
     <span class="user-avatar">
       <user-avatar user="{{user}}"></user-avatar>
     </span>

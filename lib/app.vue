@@ -33,7 +33,7 @@
   module.exports = {
     el: '#app',
     data: {
-      view: 'home',
+      view: '',
       site: {},
       params: {}
     },
