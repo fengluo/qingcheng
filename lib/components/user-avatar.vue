@@ -17,6 +17,9 @@
       var el = this.$$.el;
       el.innerHTML = span;
       if (!user.avatar_url) return;
+      var key = 'avatar:' + user.avatar_url;
+      // it is marked as 404
+      if (sessionStorage[key]) return;
 
       var size = this.$data.size || 48;
       var img = new Image();
@@ -25,7 +28,10 @@
       img.onload = function() {
         el.innerHTML = '';
         el.appendChild(img);
-      }
+      };
+      img.onerror = function() {
+        sessionStorage[key] = '1';
+      };
     }
   };
 </script>

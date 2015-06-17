@@ -15,8 +15,8 @@
           <ul v-if="topics.length">
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
-          <div v-if="cursor">
-            <a href="/c/{{ params.slug }}/{{ cursor }}" v-on="click: fetchTopics(cursor)">load more</a>
+          <div v-if="pagination">
+            <a v-if="pagination.next" href="/c/{{ params.slug }}/{{ pagination.next }}">load more</a>
           </div>
         </div>
       </div>
@@ -36,13 +36,15 @@
 </template>
 
 <script>
+  var api = require('./api');
+
   module.exports = {
     replace: true,
     props: ['params'],
     data: function() {
       return {
         cafe: {},
-        cursor: null,
+        pagination: {},
         topics: []
       }
     },
@@ -55,33 +57,28 @@
       }
     },
     watch: {
-      'params.slug': function() {
-        this.clean();
-        this.fetchCafe();
+      'params': function(obj) {
+        if (!obj.slug) return;
+
+        if (this.cafe.slug !== obj.slug) {
+          this.fetchCafe();
+        }
         this.fetchTopics();
       }
     },
     methods: {
-      clean: function() {
-        this.topics = [];
-        this.cursor = null;
-      },
       fetchCafe: function() {
-        this.$http.get(this.cafeUrl, function(resp) {
+        api.cafe(this.params.slug, function(resp) {
           this.cafe = resp;
-          console.log(resp);
-        });
+          document.title = this.cafe.name;
+        }.bind(this));
       },
-      fetchTopics: function(cursor) {
-        cursor = cursor || this.params.cursor;
-        var url = this.topicsUrl;
-        if (cursor) {
-          url += '?cursor=' + cursor;
-        }
-        this.$http.get(url, function(resp) {
-          this.cursor = resp.cursor;
-          this.topics = this.topics.concat(resp.data);
-        });
+      fetchTopics: function(page) {
+        page = page || this.params.page;
+        api.cafeTopics(this.params.slug, page, function(resp) {
+          this.pagination = resp.pagination;
+          this.topics = resp.data;
+        }.bind(this));
       }
     },
     components: {

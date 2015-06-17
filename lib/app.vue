@@ -23,7 +23,6 @@
 
   <component is="{{view}}"
   params="{{params}}"
-  keep-alive
   v-transition
   transition-mode="out-in">
 </component>
