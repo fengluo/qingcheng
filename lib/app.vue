@@ -16,7 +16,7 @@
       </div>
 
       <div class="site-account">
-        <a href="/login" class="button">Log in</a>
+        <button v-on="click: showLogin=true">Log in</button>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 /* ui */
-a.button {
+a.button, button {
   display: inline-block;
   background-color: #42B983;
   text-decoration: none;
@@ -7,14 +7,16 @@ a.button {
   color: white;
   font: normal 500 13px/32px "Lucida Grande", "Helvetica Neue", "Arial", sans-serif;
   border-radius: 32px;
+  border: none;
 }
-a.button.red {
+a.button.red, button.red {
   background-color: #FF4444;
 }
-a.button.yellow {
+a.button.yellow, button.yellow {
   background-color: #FFDC00;
 }
-a.button:hover {
+a.button:hover, button:hover {
+  cursor: pointer;
   opacity: 0.8;
 }
 
@@ -151,6 +153,37 @@ a.button:hover {
   height: 100%;
   z-index: 10;
   background-color: white;
+}
+
+/* form */
+.form-field {
+  padding: 10px 0;
+}
+.form-field input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  font-size: 18px;
+  padding: 6px 2px;
+  color: #454545;
+  font-family: "Source Sans Pro", "Lucida Grande", "Helvetica Neue", "Arial", sans-serif;
+  transition: all 0.1s ease;
+}
+.form-field input:focus {
+  outline: none;
+  border-color: #acacac;
+}
+.form-check {
+  display: block;
+  color: #999;
+  padding: 10px 0;
+}
+.form-check input {
+  vertical-align: text-bottom;
+}
+.form-submit {
+  padding-top: 20px;
 }
 
 /* transition */
