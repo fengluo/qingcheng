@@ -103,3 +103,42 @@ a.button:hover {
   margin-right: auto;
   padding: 60px 0;
 }
+
+/* messages */
+#message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 99999;
+}
+.message {
+  font-size: 16px;
+  line-height: 1.8;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #efefef;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #565656;
+}
+.message-success {
+  background-color: rgba(66, 185, 131, 0.9);
+  color: white;
+}
+.message-error {
+  background-color: rgba(255, 68, 68, 0.9);
+  color: white;
+}
+.message-warn {
+  background-color: rgba(255, 220, 0, 0.9);
+}
+
+/* transition */
+.fade-transition {
+  transition: all .2s ease-in-out;
+  opacity: 1;
+}
+.fade-enter, .fade-leave {
+  opacity: 0;
+}

@@ -40,7 +40,7 @@
 
   module.exports = {
     replace: true,
-    props: ['params', 'site'],
+    props: ['params'],
     data: function() {
       return {
         cafe: {},
@@ -59,21 +59,24 @@
     watch: {
       'params': function(obj) {
         if (!obj.slug) return;
+        this.fetchTopics();
 
         if (this.cafe.slug !== obj.slug) {
           this.fetchCafe();
         }
-        this.fetchTopics();
       }
     },
     methods: {
       fetchCafe: function() {
+        this.cafe = {slug: this.params.slug};
         api.cafe(this.params.slug, function(resp) {
           this.cafe = resp;
-          document.title = this.site.name + ' — ' + this.cafe.name;
+          document.title = this.$site.name + ' — ' + this.cafe.name;
         }.bind(this));
       },
       fetchTopics: function(page) {
+        this.topics = [];
+        this.pagination = {};
         page = page || this.params.page;
         api.cafeTopics(this.params.slug, page, function(resp) {
           this.pagination = resp.pagination;

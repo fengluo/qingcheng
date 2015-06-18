@@ -32,6 +32,9 @@
           <ul v-if="topics.length">
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
+          <div class="load-more">
+            <div v-on="click: fetchTopics(cursor)">Load More</div>
+          </div>
         </div>
       </div>
     </div>
@@ -39,9 +42,11 @@
 </template>
 
 <script>
+  var api = require('./api');
+
   module.exports = {
     replace: true,
-    props: ['params', 'site'],
+    props: ['params'],
     data: function() {
       return {
         cafe: {},
@@ -56,19 +61,16 @@
         this.cursor = null;
       },
       fetchTopics: function(cursor) {
+        console.log(cursor)
         cursor = cursor || this.params.cursor;
-        var url = this.topicsUrl;
-        if (cursor) {
-          url += '?cursor=' + cursor;
-        }
-        this.$http.get(url, function(resp) {
+        api.timeline(cursor, function(resp) {
           this.cursor = resp.cursor;
           this.topics = this.topics.concat(resp.data);
-        });
+        }.bind(this));
       }
     },
     compiled: function() {
-      document.title = this.site.name;
+      document.title = this.$site.name;
       this.fetchTopics();
     },
     components: {

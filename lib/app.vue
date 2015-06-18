@@ -1,4 +1,7 @@
 <template>
+  <div id="message" v-if="messages.length" v-transition="fade">
+    <div class="message message-{{type}}" v-repeat="messages" v-text="text" v-transition="fade"></div>
+  </div>
   <div class="top-nav">
     <div class="container">
       <div class="site-nav clearfix">
@@ -22,10 +25,10 @@
   </div>
 
   <component is="{{view}}"
-  params="{{params}}" site="{{site}}"
-  v-transition
-  transition-mode="out-in">
-</component>
+    params="{{params}}"
+    v-transition
+    transition-mode="out-in">
+  </component>
 </template>
 
 <script>
@@ -33,8 +36,23 @@
     el: '#app',
     data: {
       view: '',
+      messages: [],
       site: {},
       params: {}
+    },
+    methods: {
+      clearMessage: function(index) {
+        this.messages.splice(index, 1);
+      },
+      flashMessage: function(type, text) {
+        var msg = {type: type, text: text};
+        var me = this;
+        me.messages.push(msg);
+        var index = me.messages.length - 1;
+        setTimeout(function() {
+          me.clearMessage(index);
+        }, 1500);
+      }
     },
     components: {
       'home': require('./home.vue'),
