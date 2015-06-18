@@ -1,6 +1,6 @@
 <template>
   <li id="t-{{ topic.id }}" class="topic-item clearfix">
-    <span v-if="cafe" class="cafe-color" style="background-color: {{ cafe.style.base_color }}"></span>
+    <span v-if="cafe" class="cafe-color" v-style="color"></span>
     <span class="user-avatar">
       <user-avatar user="{{user}}"></user-avatar>
     </span>
@@ -33,6 +33,14 @@
       },
       user: function() {
         return this.topic.user;
+      },
+      color: function() {
+        var style = this.cafe.style;
+        var rv = {};
+        if (style.base_color) {
+          rv['background-color'] = style.base_color;
+        }
+        return rv;
       }
     },
     components: {

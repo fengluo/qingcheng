@@ -33,7 +33,7 @@
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
           <div class="load-more">
-            <div v-on="click: fetchTopics(cursor)">Load More</div>
+            <div role="button" v-if="cursor" v-on="click: fetchTopics(cursor)">Load More</div>
           </div>
         </div>
       </div>
@@ -78,3 +78,16 @@
     }
   };
 </script>
+
+<style>
+.load-more {
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 3px 3px;
+}
+.load-more:hover {
+  cursor: pointer;
+  background-color: #f7f7f8;
+}
+</style>
