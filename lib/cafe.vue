@@ -69,7 +69,7 @@
     methods: {
       fetchCafe: function() {
         this.cafe = {slug: this.params.slug};
-        api.cafe(this.params.slug, function(resp) {
+        api.cafe.profile(this.params.slug, function(resp) {
           this.cafe = resp;
           document.title = this.$site.name + ' — ' + this.cafe.name;
         }.bind(this));
@@ -78,7 +78,7 @@
         this.topics = [];
         this.pagination = {};
         page = page || this.params.page;
-        api.cafeTopics(this.params.slug, page, function(resp) {
+        api.cafe.topics(this.params.slug, page, function(resp) {
           this.pagination = resp.pagination;
           this.topics = resp.data;
         }.bind(this));

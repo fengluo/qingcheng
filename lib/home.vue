@@ -61,7 +61,6 @@
         this.cursor = null;
       },
       fetchTopics: function(cursor) {
-        console.log(cursor)
         cursor = cursor || this.params.cursor;
         api.timeline(cursor, function(resp) {
           this.cursor = resp.cursor;

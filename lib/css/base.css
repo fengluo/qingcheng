@@ -13,6 +13,9 @@ body {
   background-color: #f7f8f9;
   font: normal 400 16px/1.5 "Source Sans Pro", "Helvetica Neue", "Arial", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
 }
+body.no-scroll {
+  overflow: hidden;
+}
 a {
   color: #42B983;
 }

@@ -16,7 +16,8 @@ var app = new WebpackDevServer(webpack(config), {
   historyApiFallback: true,
 
   proxy: {
-    "/api/*": "http://localhost:5000"
+    "/api/*": "http://localhost:5000",
+    "/session": "http://localhost:5000",
   }
 });
 
