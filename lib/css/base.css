@@ -1,7 +1,7 @@
 :root {
-  #FFDC00: #FFDC00;
   --green: #42B983;
   --red: #FF4444;
+  --yellow: #FFDC00;
 }
 
 html, body {

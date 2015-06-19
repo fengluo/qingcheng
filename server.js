@@ -5,9 +5,7 @@ var config = require('./webpack.config');
 
 config.entry.unshift('webpack/hot/dev-server');
 
-config.plugins = [
-  new webpack.HotModuleReplacementPlugin(),
-];
+config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 var app = new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
