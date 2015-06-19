@@ -16,7 +16,8 @@
       </div>
 
       <div class="site-account">
-        <button v-on="click: showLogin=true">Log in</button>
+        <button v-if="!currentUser.username" v-on="click: showLogin=true">Log in</button>
+        <button class="red" v-if="currentUser.username" v-on="click: logout()">Log out</button>
       </div>
     </div>
   </div>
@@ -38,11 +39,15 @@
     el: '#app',
     data: {
       view: '',
+      currentUser: {},
       showLogin: false,
       messages: [],
       params: {}
     },
     methods: {
+      logout: function() {
+        require('./api').user.logout();
+      },
       clearMessage: function(index) {
         this.messages.splice(index, 1);
       },

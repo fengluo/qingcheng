@@ -32,8 +32,8 @@
           <ul v-if="topics.length">
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
-          <div class="load-more">
-            <div role="button" v-if="cursor" v-on="click: fetchTopics(cursor)">Load More</div>
+          <div class="load-more" v-if="cursor">
+            <div role="button" v-on="click: fetchTopics(cursor)">Load More</div>
           </div>
         </div>
       </div>

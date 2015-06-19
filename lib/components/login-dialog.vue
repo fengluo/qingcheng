@@ -42,9 +42,7 @@
           permanent: this.permanent
         };
         api.user.login(data, function(resp) {
-          if (resp.status === 'ok') {
-            this.show = false;
-          }
+          this.show = false;
         }.bind(this));
       }
     },
@@ -64,7 +62,7 @@
   .login-form {
     position: absolute;
     width: 380px;
-    top: 120px;
+    top: 160px;
     left: 50%;
     margin-left: -230px;
     z-index: 20;
