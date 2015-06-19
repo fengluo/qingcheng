@@ -50,16 +50,12 @@
     data: function() {
       return {
         cafe: {},
-        cursor: null,
+        cursor: 0,
         topics: [],
         topicsUrl: '/api/topics/timeline'
       }
     },
     methods: {
-      clean: function() {
-        this.topics = [];
-        this.cursor = null;
-      },
       fetchTopics: function(cursor) {
         cursor = cursor || this.params.cursor;
         api.timeline(cursor, function(resp) {
