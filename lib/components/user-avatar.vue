@@ -6,7 +6,7 @@
   var wordColor = require('word-color');
   module.exports = {
     replace: true,
-    props: ['user', 'size'],
+    props: ['user'],
     compiled: function() {
       var user = this.$data.user;
       var span = '<span title="@#1" style="background-color:#2;">#3</span>';
@@ -21,7 +21,6 @@
       // it is marked as 404
       if (sessionStorage[key]) return;
 
-      var size = this.$data.size || 48;
       var img = new Image();
       img.src = user.avatar_url;
       img.alt = user.username;

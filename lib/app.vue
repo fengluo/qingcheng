@@ -17,7 +17,10 @@
 
       <div class="site-account">
         <button v-if="!currentUser.username" v-on="click: showLogin=true">Log in</button>
-        <button class="red" v-if="currentUser.username" v-on="click: logout()">Log out</button>
+        <div class="site-login-user" v-if="currentUser.username" v-on="click: userPopup">
+          <user-avatar user="{{currentUser}}"></user-avatar>
+          <span class="dropdown-caret"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -48,17 +51,9 @@
       logout: function() {
         require('./api').user.logout();
       },
-      clearMessage: function(index) {
-        this.messages.splice(index, 1);
-      },
-      flashMessage: function(type, text) {
-        var msg = {type: type, text: text};
-        var me = this;
-        me.messages.push(msg);
-        var index = me.messages.length - 1;
-        setTimeout(function() {
-          me.clearMessage(index);
-        }, 2000);
+      userPopup: function(e) {
+        e.preventDefault();
+        console.log('hello')
       }
     },
     components: {
@@ -66,7 +61,21 @@
       'cafe': require('./cafe.vue'),
       'topic': require('./topic.vue'),
       'user': require('./user.vue'),
+      'user-avatar': require('./components/user-avatar.vue'),
       'login-dialog': require('./components/login-dialog.vue')
     }
   }
 </script>
+
+<style>
+.site-login-user {
+  margin-top: 14px;
+  display: inline-block;
+  cursor: pointer;
+}
+.site-login-user .avatar {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+}
+</style>

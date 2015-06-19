@@ -1,7 +1,7 @@
 <template>
   <div class="overlay">
     <div class="login-mask overlay-mask" v-on="click: show=false"></div>
-    <div class="login-form" v-if="show">
+    <div class="login-form" v-class="shake: error">
       <form action="/session" method="post" v-on="submit: login">
         <div class="form-field">
           <input type="text" placeholder="Username" name="username" v-model="username" required>
@@ -30,6 +30,7 @@
         show: true,
         username: '',
         password: '',
+        error: false,
         permanent: true
       };
     },
@@ -43,6 +44,12 @@
         };
         api.user.login(data, function(resp) {
           this.show = false;
+        }.bind(this)).error(function() {
+          this.error = true;
+          // clear error
+          setTimeout(function() {
+            this.error = false;
+          }.bind(this), 1000);
         }.bind(this));
       }
     },
