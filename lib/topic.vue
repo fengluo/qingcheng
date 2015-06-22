@@ -1,48 +1,146 @@
 <template>
-  <div class="header">
-    <div class="header-intro">
-      <div class="container">
-        <h2>{{ user.username }}</h2>
+  <div class="hentry">
+    <div class="container entry-header">
+      <h2 class="entry-title">{{ topic.title }}</h2>
+      <div class="entry-meta">
+        <a v-if="cafe" href="/c/{{ cafe.slug }}" title="Published in {{ cafe.name }}">
+          <span class="cafe-logo" v-style="cafeStyle"></span>
+          {{ cafe.name }}
+        </a>
+        <time datetime="{{ topic.created_at }}" title="Updated at {{ topic.updated_at }}">{{ topic.created_at| timeago }}</time>
+        <a v-if="user" href="/u/{{ user.username }}" title="Published by @{{ user.username }}">@{{ user.username }}</a>
+      </div>
+    </div>
+    <div class="container content yue" v-html="topic.content"></div>
+    <div class="container entry-footer">
+      <div class="topic-cafe column" v-if="cafe.slug">
+        <a href="/u/{{ cafe.slug }}" class="column-header">
+          <span class="cafe-logo" v-if="!cafe.style.logo" v-style="cafeStyle"></span>
+          <div class="column-header-content">
+            <strong>{{ cafe.name }}</strong>
+          </div>
+        </a>
+        <p>{{ cafe.content }}</p>
+      </div>
+      <div class="topic-author column" v-if="user.username">
+        <div class="column-header">
+          <user-avatar user="{{ user }}"></user-avatar>
+          <a class="column-header-content" href="/u/{{ user.username }}">
+            <strong>{{ user.username }}</strong>
+            <div>#{{ user.id }}</div>
+          </a>
+        </div>
         <p>{{ user.description }}</p>
       </div>
-    </div>
-    <div class="header-nav">
-      <div class="container">
-        <nav>
-          <a href="/u/{{user.username}}/topics">Topics</a>
-          <a href="/u/{{user.username}}/likes">Likes</a>
-          <a href="/u/{{user.username}}/replies">Replies</a>
-          <a href="/u/{{user.username}}/cafes">Cafes</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <div class="hentry">
-    <div class="container yue">
-        <h2 class="entry-title">Topic view</h2>
-        <p>{{ params|json }}</p>
     </div>
   </div>
 </template>
 
 <script>
+  var api = require('./api');
+
   module.exports = {
     replace: true,
-    props: ['params']
+    props: ['params'],
+    data: function() {
+      return {
+        topic: {},
+        cafe: {},
+        user: {},
+        cafeStyle: {},
+        params: {}
+      };
+    },
+    watch: {
+      'params.topicId': function(id) {
+        if (id) this.fetchTopic(id);
+      }
+    },
+    methods: {
+      fetchTopic: function(id) {
+        id = id || this.params.topicID;
+        api.topic.view(id, function(resp) {
+          this.topic = resp;
+          this.cafe = resp.cafe;
+          this.user = resp.user;
+          var style = resp.cafe.style;
+          this.cafeStyle = {'background-color': style.color || '#222221'};
+          if (style.logo) {
+            this.cafeStyle['background-image'] = 'url(' + style.logo + ')';
+          }
+        }.bind(this));
+      }
+    },
+    components: {
+      'user-avatar': require('./components/user-avatar.vue')
+    }
   };
 </script>
 
 <style>
+.cafe-logo {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
 .hentry {
-  padding: 20px 0;
+  padding: 60px 0;
 }
 .hentry .container {
   max-width: 680px;
-  padding: 10px 20px;
-  background-color: white;
 }
 .hentry .entry-title {
-  margin-top: 0;
-  border-bottom: 1px solid #ddd;
+  margin: 0;
+  padding-bottom: 10px;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1;
+  color: #222223;
+}
+.entry-meta {
+  font-size: 14px;
+  line-height: 2em;
+  color: #999;
+  padding: 10px 0;
+}
+.entry-meta time {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+.entry-meta .cafe-logo {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.2em;
+}
+.entry-footer {
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+.entry-footer .column {
+  float: left;
+  width: 46%;
+}
+.entry-footer .column p {
+  margin: 10px 0 0 0;
+  line-height: 1.2;
+  color: #666;
+}
+.entry-footer .topic-cafe {
+  margin-right: 8%;
+}
+.entry-footer .column-header {
+  display: block;
+  overflow: hidden;
+}
+.column-header .cafe-logo, .column-header .avatar {
+  float: left;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  margin-right: 10px;
 }
 </style>

@@ -38,7 +38,7 @@
         var style = this.cafe.style;
         var rv = {};
         if (style.base_color) {
-          rv['background-color'] = style.base_color;
+          rv['background-color'] = style.color;
         }
         return rv;
       }

@@ -24,6 +24,7 @@
       var img = new Image();
       img.src = user.avatar_url;
       img.alt = user.username;
+      img.title = '@' + user.username;
       img.onload = function() {
         el.innerHTML = '';
         el.appendChild(img);
@@ -51,6 +52,6 @@
     text-align: center;
     font-size: 24px;
     border-radius: 3px;
-    vertical-align: middle;
+    vertical-align: top;
   }
 </style>

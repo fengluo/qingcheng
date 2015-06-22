@@ -32,12 +32,11 @@ module.exports = {
   },
   watch: {
     'cafe.style': function(style) {
-      this.style = {};
       if (!style) return;
 
       var rv = {};
-      if (style.background_url) {
-        rv['background-image'] = 'url(' + style.background_url + ')';
+      if (style.cover) {
+        rv['background-image'] = 'url(' + style.cover + ')';
       }
       this.style = rv;
     }
