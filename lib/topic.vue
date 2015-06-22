@@ -14,8 +14,9 @@
     <div class="container content yue" v-html="topic.content"></div>
     <div class="container entry-footer">
       <div class="topic-cafe column" v-if="cafe.slug">
-        <a href="/u/{{ cafe.slug }}" class="column-header">
-          <span class="cafe-logo" v-if="!cafe.style.logo" v-style="cafeStyle"></span>
+        <div class="column-title">Published In</div>
+        <a href="/c/{{ cafe.slug }}" class="column-header">
+          <span class="cafe-logo" v-style="cafeStyle"></span>
           <div class="column-header-content">
             <strong>{{ cafe.name }}</strong>
           </div>
@@ -23,6 +24,7 @@
         <p>{{ cafe.content }}</p>
       </div>
       <div class="topic-author column" v-if="user.username">
+        <div class="column-title">Created By</div>
         <div class="column-header">
           <user-avatar user="{{ user }}"></user-avatar>
           <a class="column-header-content" href="/u/{{ user.username }}">
@@ -117,12 +119,19 @@
 .entry-footer {
   border-top: 1px solid #ececec;
   border-bottom: 1px solid #ececec;
-  padding: 20px 0;
   margin-top: 20px;
 }
 .entry-footer .column {
   float: left;
   width: 46%;
+  padding-bottom: 20px;
+  line-height: 1.2;
+}
+.entry-footer .column-title {
+  padding: 6px 0 14px;
+  color: #999;
+  font-size: 13px;
+  text-transform: uppercase;
 }
 .entry-footer .column p {
   margin: 10px 0 0 0;
