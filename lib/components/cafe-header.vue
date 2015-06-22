@@ -3,7 +3,7 @@
     <div class="header-intro" v-style="style">
       <div class="container">
         <h2>{{ cafe.name }}</h2>
-        <p>{{ cafe.content }}</p>
+        <p v-html="cafe.content|urlize"></p>
       </div>
     </div>
     <div class="header-nav">
