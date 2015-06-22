@@ -36,12 +36,12 @@
       </div>
     </div>
   </div>
-  <div class="entry-view comment-list">
+  <div class="entry-view comment-box">
     <div class="container">
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
+        <li class="more-comments" v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</li>
       </ul>
-      <div v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</div>
     </div>
   </div>
 </template>
@@ -58,8 +58,8 @@
         cafe: {},
         user: {},
         comments: [],
-        cafeStyle: {},
         cursor: 0,
+        cafeStyle: {},
         params: {}
       };
     },
@@ -70,14 +70,15 @@
 
         // load comments
         this.comments = [];
-        this.commentCursor = 0;
+        this.cursor = 0;
         this.fetchComments(id);
       }
     },
     methods: {
       fetchTopic: function(id) {
-        id = id || this.params.topicID;
+        id = id || this.params.topicId;
         api.topic.view(id, function(resp) {
+          document.title = this.$site.name + ' — ' + resp.title;
           this.topic = resp;
           this.cafe = resp.cafe;
           this.user = resp.user;
@@ -89,12 +90,16 @@
         }.bind(this));
       },
       fetchComments: function(id, cursor) {
-        id = id || this.params.topicID;
+        id = id || this.params.topicId;
         cursor = cursor || this.commentCursor;
         api.topic.comments(id, cursor, function(resp) {
           this.comments = this.comments.concat(resp.data);
-          console.log(resp);
-          this.commentCursor = resp.cursor;
+          this.cursor = resp.cursor;
+
+          var count = this.topic.comment_count;
+          if (count && this.comments.length === count) {
+            this.cursor = 0;
+          }
         }.bind(this));
       }
     },
@@ -117,7 +122,7 @@
     background-size: cover;
   }
   .hentry {
-    padding: 60px 0;
+    padding: 60px 0 20px;
   }
   .hentry .entry-title {
     margin: 0;
@@ -180,5 +185,24 @@
     height: 48px;
     line-height: 48px;
     margin-right: 10px;
+  }
+  .comment-box {
+    padding-bottom: 60px;
+  }
+  .comment-box ul {
+    margin: 0;
+    padding: 0;
+  }
+  .comment-box .more-comments {
+    padding: 8px 0;
+    text-align: center;
+    color: #999;
+    margin-top: -1px;
+    background-color: #f0f0f0;
+    list-style-type: none;
+    cursor: pointer;
+  }
+  .comment-box .more-comments:hover {
+    background-color: #dadada;
   }
 </style>

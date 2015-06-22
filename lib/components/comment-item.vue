@@ -28,24 +28,20 @@
 </script>
 
 <style>
-.comment-list ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
 .comment-item {
-  margin-bottom: 20px;
   color: #565655;
+  padding-top: 20px;
+  list-style-type: none;
 }
 .comment-item .comment-main {
   overflow: hidden;
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  box-shadow: 0 1px 0 #eee;
 }
 .comment-item .comment-info {
   font-size: 13px;
   color: #999;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   line-height: 1;
 }
 .comment-item .comment-content {
