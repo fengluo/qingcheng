@@ -1,9 +1,11 @@
 <template>
   <div class="header">
-    <div class="header-intro">
-      <div class="container">
-        <h2>ZERQU</h2>
-        <p>ZERQU is not a forum, it is an API based application.</p>
+    <div class="header-cover">
+      <div class="header-intro">
+        <div class="container">
+          <h2>ZERQU</h2>
+          <p>ZERQU is not a forum, it is an API based application.</p>
+        </div>
       </div>
     </div>
     <div class="header-nav">

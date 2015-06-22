@@ -41,6 +41,7 @@
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
       </ul>
+      <div v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</div>
     </div>
   </div>
 </template>
@@ -58,7 +59,7 @@
         user: {},
         comments: [],
         cafeStyle: {},
-        commentCursor: 0,
+        cursor: 0,
         params: {}
       };
     },

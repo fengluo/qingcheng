@@ -7,7 +7,7 @@
         <time datetime="{{ comment.created_at }}">{{ comment.created_at | timeago }}</time>
         #{{$index + 1}}
       </div>
-      <div class="comment-content" v-html="comment.content|htmlize"></div>
+      <div class="comment-content" v-html="comment.content"></div>
     </div>
   </li>
 </template>
