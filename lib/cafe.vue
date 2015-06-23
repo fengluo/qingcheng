@@ -48,14 +48,6 @@
         topics: []
       }
     },
-    computed: {
-      cafeUrl: function() {
-        return '/api/cafes/' + this.params.slug;
-      },
-      topicsUrl: function() {
-        return this.cafeUrl + '/topics';
-      }
-    },
     watch: {
       'params': function(obj) {
         if (!obj.slug) return;

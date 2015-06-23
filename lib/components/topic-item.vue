@@ -37,7 +37,7 @@
       color: function() {
         var style = this.cafe.style;
         var rv = {};
-        if (style.base_color) {
+        if (style.color) {
           rv['background-color'] = style.color;
         }
         return rv;

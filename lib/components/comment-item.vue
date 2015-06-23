@@ -36,7 +36,7 @@
 .comment-item .comment-main {
   overflow: hidden;
   padding-bottom: 10px;
-  box-shadow: 0 1px 0 #eee;
+  border-bottom: 1px solid #eee;
 }
 .comment-item .comment-info {
   font-size: 13px;

@@ -51,10 +51,8 @@
     props: ['params'],
     data: function() {
       return {
-        cafe: {},
         cursor: 0,
-        topics: [],
-        topicsUrl: '/api/topics/timeline'
+        topics: []
       }
     },
     methods: {
