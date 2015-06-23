@@ -4,7 +4,7 @@
       <div class="header-intro">
         <div class="container">
           <h2>{{ cafe.name }}</h2>
-          <p v-html="cafe.content|urlize"></p>
+          <p v-html="cafe.description|urlize"></p>
         </div>
       </div>
     </div>
@@ -13,6 +13,7 @@
         <nav v-if="cafe.slug">
           <a href="/c/{{ cafe.slug }}">Topics</a>
           <a href="/c/{{ cafe.slug }}/members">Members</a>
+          <a v-if="cafe.intro" href="/t/{{ cafe.intro }}">Introduction</a>
         </nav>
         <div class="header-actions">
           <a class="button" href="#">Follow</a>

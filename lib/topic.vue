@@ -20,7 +20,7 @@
               <strong>{{ cafe.name }}</strong>
             </div>
           </a>
-          <p v-html="cafe.content|urlize"></p>
+          <p v-html="cafe.description|urlize"></p>
         </div>
         <div class="topic-author column" v-if="user.username">
           <div class="column-title">Created By</div>
