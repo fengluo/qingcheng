@@ -1,9 +1,16 @@
 <template>
-  <div class="entry-view">
-    <div class="hentry container">
-      <h2 class="entry-title">{{ topic.title }}</h2>
+  <div class="entry-view hentry">
+    <div class="entry-cover cover" v-if="topic.id && topic.info.cover" v-style="topicStyle">
+      <div class="cover-inner">
+        <div class="container">
+          <h2 class="entry-title">{{ topic.title }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container" v-if="topic.id">
+      <h2 class="entry-title" v-if="!topic.info.cover">{{ topic.title }}</h2>
       <div class="entry-meta">
-        <a v-if="cafe" href="/c/{{ cafe.slug }}" title="Published in {{ cafe.name }}">
+        <a href="/c/{{ cafe.slug }}" title="Published in {{ cafe.name }}">
           <span class="cafe-logo" v-style="cafeStyle"></span>
           {{ cafe.name }}
         </a>
@@ -55,13 +62,33 @@
     data: function() {
       return {
         topic: {},
-        cafe: {},
-        user: {},
         comments: [],
         cursor: 0,
-        cafeStyle: {},
         params: {}
       };
+    },
+    computed: {
+      cafe: function() {
+        return this.topic.cafe;
+      },
+      user: function() {
+        return this.topic.user;
+      },
+      topicStyle: function() {
+        var cover = this.topic.info.cover;
+        if (cover) {
+          return {'background-image': 'url(' + cover + ')'};
+        }
+        return {};
+      },
+      cafeStyle: function() {
+        var style = this.cafe.style;
+        var rv = {'background-color': style.color || '#222221'};
+        if (style.logo) {
+          rv['background-image'] = 'url(' + style.logo + ')';
+        }
+        return rv;
+      },
     },
     watch: {
       'params.topicId': function(id) {
@@ -76,17 +103,13 @@
     },
     methods: {
       fetchTopic: function(id) {
+        // clean
+        this.topic = {};
+
         id = id || this.params.topicId;
         api.topic.view(id, function(resp) {
           document.title = this.$site.name + ' — ' + resp.title;
           this.topic = resp;
-          this.cafe = resp.cafe;
-          this.user = resp.user;
-          var style = resp.cafe.style;
-          this.cafeStyle = {'background-color': style.color || '#222221'};
-          if (style.logo) {
-            this.cafeStyle['background-image'] = 'url(' + style.logo + ')';
-          }
         }.bind(this));
       },
       fetchComments: function(id, cursor) {
@@ -121,16 +144,21 @@
     background-position: center center;
     background-size: cover;
   }
-  .hentry {
-    padding: 60px 0 20px;
-  }
   .hentry .entry-title {
     margin: 0;
+    padding-top: 60px;
     padding-bottom: 10px;
     font-weight: 400;
     font-size: 42px;
     line-height: 1;
     color: #222223;
+  }
+  .entry-cover {
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  .entry-cover .entry-title {
+    color: white;
   }
   .entry-meta {
     font-size: 14px;

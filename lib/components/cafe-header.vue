@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <div class="header-cover" v-style="style">
-      <div class="header-intro">
+    <div class="header-cover cover" v-style="style">
+      <div class="header-intro cover-inner">
         <div class="container">
           <h2>{{ cafe.name }}</h2>
           <p v-html="cafe.description|urlize"></p>
