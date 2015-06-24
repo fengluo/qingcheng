@@ -4,11 +4,13 @@
   "description": "qingcheng is a front end theme for zerqu",
   "devDependencies": {
     "css-loader": "^0.14.5",
+    "cssnext-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "^0.8.2",
     "html-loader": "^0.3.0",
     "insert-css": "^0.2.0",
     "node-libs-browser": "^0.5.2",
     "style-loader": "^0.12.3",
-    "vue-loader": "^1.1.6",
+    "vue-loader": "^2.0.1",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
   },
