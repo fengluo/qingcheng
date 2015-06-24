@@ -4,11 +4,13 @@
   </div>
   <div class="entry-view comment-box">
     <div class="container">
-      <form class="comment-form" disabled>
+      <form class="comment-form" v-on="submit: formSubmit" v-el="form">
         <div class="comment-form-mask" v-on="click: showLogin" v-if="!currentUser.id"></div>
-        <textarea placeholder="Comment here" v-model='commentInput' v-on="keydown: submit"></textarea>
-        <button v-if="currentUser.id" v-on="click: submit">Reply</button>
+        <textarea placeholder="Write your comment" v-model='commentInput' v-on="keydown: keybordSubmit" v-class="active: commentInput.length"></textarea>
+        <button v-if="currentUser.username">Reply</button>
+        <span v-if="commentLeft" v-text="commentLeft"></span>
       </form>
+      <div class="comment-list-header">{{ topic.comment_count }} responses</div>
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
         <li class="more-comments" v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</li>
@@ -35,6 +37,11 @@
     computed: {
       currentUser: function() {
         return this.$root.currentUser;
+      },
+      commentLeft: function() {
+        var num = 480 - this.commentInput.length;
+        if (num < 60) return num;
+        return 0;
       }
     },
     watch: {
@@ -72,16 +79,26 @@
           }
         }.bind(this));
       },
-      submit: function(e) {
-        if (e.type === 'keydown') {
-          if (e.keyCode !== 13) return;
-          var mac = /mac/i.test(navigator.userAgent);
-          if ((mac && !e.metaKey) || (!mac && !e.ctrlKey)) return;
-        }
-        e.preventDefault();
-
+      keybordSubmit: function(e) {
+        if (e.keyCode !== 13) return;
+        var mac = /mac/i.test(navigator.userAgent);
+        if ((mac && !e.metaKey) || (!mac && !e.ctrlKey)) return;
+        this.postComment();
+      },
+      formSubmit: function(e) {
+        e && e.preventDefault();
+        this.postComment();
+      },
+      postComment: function() {
         var content = this.commentInput.trim();
-        if (!content) return;
+        if (!content || 480 - content.length < 0) {
+          var form = this.$$.form;
+          form.classList.add('shake');
+          setTimeout(function() {
+            form.classList.remove('shake');
+          }, 1500)
+          return;
+        }
 
         this.commentInput = '';
         api.topic.reply(this.params.topicId, content, function(resp) {
@@ -131,13 +148,21 @@
     resize: none;
     transition: all 0.15s ease;
   }
-  .comment-form textarea:focus {
+  .comment-form textarea:focus, .comment-form textarea.active {
     height: 12.6em;
   }
 
   .comment-box ul {
     margin: 0;
     padding: 0;
+  }
+  .comment-list-header {
+    line-height: 1;
+    color: #666;
+    padding: 20px 0 6px;
+    border-bottom: 1px solid #eee;
+    text-transform: uppercase;
+    font-size: 13px;
   }
   .comment-box .more-comments {
     padding: 8px 0;
