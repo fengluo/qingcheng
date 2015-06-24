@@ -44,7 +44,7 @@
   <div id="message" v-if="messages.length" v-transition="fade">
     <div class="message message-{{type}}" v-repeat="messages" v-text="text" v-transition="fade"></div>
   </div>
-  <login-dialog v-if="showLogin" show="{{showLogin}}" v-transition="fade"></login-dialog>
+  <login-dialog v-if="showLogin" v-transition="fade"></login-dialog>
 </template>
 
 <script>

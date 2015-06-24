@@ -5,7 +5,7 @@
       <div class="comment-info">
         <a href="/u/{{user.username}}">{{user.username}}</a>
         <time datetime="{{ comment.created_at }}">{{ comment.created_at | timeago }}</time>
-        #{{$index + 1}}
+        #{{ comment.id }}
       </div>
       <div class="comment-content" v-html="comment.content"></div>
     </div>
@@ -56,5 +56,25 @@
   width: 40px;
   height: 40px;
   line-height: 40px;
+}
+
+.comment-content blockquote {
+  margin: 0 0 1.64em 0;
+  border-left: 3px solid #dadada;
+  padding-left: 12px;
+  color: #666664;
+}
+.comment-content pre {
+  margin: 1.64em 0;
+  padding: 7px;
+  border: none;
+  border-left: 3px solid #dadada;
+  padding-left: 10px;
+  overflow: auto;
+  line-height: 1.5;
+  font-size: 0.96em;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  color: #4c4c4c;
+  background-color: #f9f9f7;
 }
 </style>

@@ -22,7 +22,9 @@ a {
 a:hover {
   opacity: 0.8;
 }
-
+textarea {
+  font: normal 400 16px/1.5 "Source Sans Pro", "Helvetica Neue", "Arial", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+}
 nav a {
   display: inline-block;
   text-decoration: none;

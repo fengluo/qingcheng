@@ -1,9 +1,14 @@
 <template>
   <div class="entry-view">
-    <entry-page v-if="topic" topic="{{ topic }}"></entry-page>
+    <entry-page v-if="topic.id" topic="{{ topic }}"></entry-page>
   </div>
   <div class="entry-view comment-box">
     <div class="container">
+      <form class="comment-form" disabled>
+        <div class="comment-form-mask" v-on="click: showLogin" v-if="!currentUser.id"></div>
+        <textarea placeholder="Comment here" v-model='commentInput' v-on="keydown: submit"></textarea>
+        <button v-if="currentUser.id" v-on="click: submit">Reply</button>
+      </form>
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
         <li class="more-comments" v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</li>
@@ -23,8 +28,14 @@
         topic: {},
         comments: [],
         cursor: 0,
+        commentInput: '',
         params: {}
       };
+    },
+    computed: {
+      currentUser: function() {
+        return this.$root.currentUser;
+      }
     },
     watch: {
       'params.topicId': function(id) {
@@ -60,6 +71,25 @@
             this.cursor = 0;
           }
         }.bind(this));
+      },
+      submit: function(e) {
+        if (e.type === 'keydown') {
+          if (e.keyCode !== 13) return;
+          var mac = /mac/i.test(navigator.userAgent);
+          if ((mac && !e.metaKey) || (!mac && !e.ctrlKey)) return;
+        }
+        e.preventDefault();
+
+        var content = this.commentInput.trim();
+        if (!content) return;
+
+        this.commentInput = '';
+        api.topic.reply(this.params.topicId, content, function(resp) {
+          this.comments = [resp].concat(this.comments);
+        }.bind(this));
+      },
+      showLogin: function() {
+        this.$root.showLogin = true;
       }
     },
     components: {
@@ -77,6 +107,34 @@
   .comment-box {
     padding-bottom: 60px;
   }
+  .comment-box .comment-form {
+    position: relative;
+    padding-bottom: 20px;
+  }
+  .comment-form .comment-form-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    z-index: 9;
+  }
+  .comment-form textarea {
+    width: 100%;
+    height: 4.2em;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    color: #565656;
+    line-height: 1.4;
+    resize: none;
+    transition: all 0.15s ease;
+  }
+  .comment-form textarea:focus {
+    height: 12.6em;
+  }
+
   .comment-box ul {
     margin: 0;
     padding: 0;

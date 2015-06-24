@@ -1,6 +1,6 @@
 <template>
   <div class="overlay">
-    <div class="login-mask overlay-mask" v-on="click: show=false"></div>
+    <div class="login-mask overlay-mask" v-on="click: close"></div>
     <div class="login-form" v-class="shake: error">
       <form action="/session" method="post" v-on="submit: login">
         <div class="form-field">
@@ -24,10 +24,8 @@
   var api = require('../api');
   module.exports = {
     replace: true,
-    props: ['show'],
     data: function() {
       return {
-        show: true,
         username: '',
         password: '',
         error: false,
@@ -35,6 +33,9 @@
       };
     },
     methods: {
+      close: function() {
+        this.$root.showLogin = false;
+      },
       login: function(e) {
         e.preventDefault();
         var data = {
@@ -43,7 +44,7 @@
           permanent: this.permanent
         };
         api.user.login(data, function(resp) {
-          this.show = false;
+          this.close();
         }.bind(this)).error(function() {
           this.error = true;
           // clear error

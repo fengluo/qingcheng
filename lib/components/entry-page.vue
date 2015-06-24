@@ -1,4 +1,13 @@
 <template>
+  <style class="cafe-theme" v-if="cafe.style.color">
+    .entry-content a {
+      color: {{ cafe.style.color }};
+    }
+    .entry-content blockquote {
+      border-color: {{ cafe.style.color }};
+    }
+  </style>
+
   <div class="hentry">
     <div class="entry-cover cover" v-if="topicStyle" v-style="topicStyle">
       <div class="cover-inner">
@@ -18,14 +27,14 @@
         <a v-if="user" href="/u/{{ user.username }}" title="Published by @{{ user.username }}">@{{ user.username }}</a>
       </div>
 
-      <div class="content yue" v-html="topic.content"></div>
+      <div class="entry-content yue" v-html="topic.content"></div>
 
       <div class="entry-footer clearfix">
         <div class="topic-cafe column" v-if="cafe.slug">
           <div class="column-title">Published In</div>
           <a href="/c/{{ cafe.slug }}" class="column-header">
             <span class="cafe-logo" v-style="cafeStyle"></span>
-            <div class="column-header-content">
+            <div class="column-main">
               <strong>{{ cafe.name }}</strong>
             </div>
           </a>
@@ -36,7 +45,7 @@
           <div class="column-title">Created By</div>
           <div class="column-header">
             <user-avatar user="{{ user }}"></user-avatar>
-            <a class="column-header-content" href="/u/{{ user.username }}">
+            <a class="column-main" href="/u/{{ user.username }}">
               <strong>{{ user.username }}</strong>
               <div>#{{ user.id }}</div>
             </a>
@@ -97,11 +106,12 @@
     color: #222223;
   }
   .entry-cover {
-    height: 300px;
+    height: 340px;
     margin-bottom: 20px;
   }
   .entry-cover .entry-title {
     color: white;
+    padding-bottom: 1em;
   }
   .entry-meta {
     font-size: 14px;
@@ -147,7 +157,7 @@
     display: block;
     overflow: hidden;
   }
-  .entry-footer .column-header-content {
+  .entry-footer .column-main {
     overflow: hidden;
   }
   .column-header .cafe-logo, .column-header .avatar {
