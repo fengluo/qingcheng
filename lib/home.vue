@@ -24,11 +24,10 @@
       <div class="main-view">
         <div class="topic-list box-container">
           <div class="topic-filters clearfix">
-            <div class="topic-order-by">
-              <select>
-                <option>Newest</option>
-              </select>
-            </div>
+            <nav class="filter-nav">
+              <a href="#">My Feed</a>
+              <a href="#">Explore</a>
+            </nav>
           </div>
           <logo-loading v-if="!topics.length"></logo-loading>
           <ul v-if="topics.length">

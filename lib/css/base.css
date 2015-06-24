@@ -136,6 +136,14 @@ nav a:hover {
   width: 320px;
 }
 
+.footer {
+  padding: 16px 0 24px;
+  border-top: 1px solid #eee;
+  color: #999;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
 .box-container {
   background-color: white;
   box-shadow: 0 1px 1px rgba(100, 100, 100, 0.2);
@@ -148,8 +156,18 @@ nav a:hover {
   margin: 0;
 }
 .topic-list .topic-filters {
-  padding: 10px 10px 14px 12px;
   border-bottom: 1px solid #eee;
+}
+.topic-list .filter-nav {
+  padding: 10px 10px 0 12px;
+  float: right;
+}
+.topic-list .filter-nav a {
+  padding-bottom: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #565656;
+  margin-left: 10px;
 }
 
 /* widget */

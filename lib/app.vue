@@ -31,6 +31,16 @@
     transition-mode="out-in">
   </component>
 
+  <div class="footer">
+    <div class="container">
+      <div style="float: left">Copyright &copy; {{year}} {{$site.name}}</div>
+      <div style="float: right">
+        <a href="https://zerqu.com">ZERQU</a> •
+        <a href="https://github.com/zerqu/qingcheng">青城</a>
+      </div>
+    </div>
+  </div>
+
   <div id="message" v-if="messages.length" v-transition="fade">
     <div class="message message-{{type}}" v-repeat="messages" v-text="text" v-transition="fade"></div>
   </div>
@@ -44,6 +54,7 @@
       view: '',
       currentUser: {},
       showLogin: false,
+      year: new Date().getFullYear(),
       messages: [],
       params: {}
     },
@@ -77,5 +88,8 @@
   width: 28px;
   height: 28px;
   line-height: 28px;
+}
+.site-login-user .avatar span {
+  font-size: 16px;
 }
 </style>
