@@ -6,11 +6,12 @@
     <div class="container">
       <form class="comment-form" v-on="submit: formSubmit" v-el="form">
         <div class="comment-form-mask" v-on="click: showLogin" v-if="!currentUser.id"></div>
+        <user-avatar user="{{ currentUser }}" v-if="currentUser.id"></user-avatar>
         <textarea placeholder="Write your comment" v-model='commentInput' v-on="keydown: keybordSubmit" v-class="active: commentInput.length"></textarea>
         <button v-if="currentUser.username">Reply</button>
-        <span v-if="commentLeft" v-text="commentLeft"></span>
+        <span class="count-left" v-if="commentLeft" v-html="commentLeft"></span>
       </form>
-      <div class="comment-list-header">{{ topic.comment_count }} responses</div>
+      <div class="comment-list-header" v-if="comments.length">{{ topic.comment_count }} responses</div>
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
         <li class="more-comments" v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</li>
@@ -40,6 +41,8 @@
       },
       commentLeft: function() {
         var num = 480 - this.commentInput.length;
+        if (num < 20) return '<span class="red">' + num + '</span>';
+        if (num < 30) return '<span class="yellow">' + num + '</span>';
         if (num < 60) return num;
         return 0;
       }
@@ -102,6 +105,7 @@
 
         this.commentInput = '';
         api.topic.reply(this.params.topicId, content, function(resp) {
+          this.topic.comment_count += 1;
           this.comments = [resp].concat(this.comments);
         }.bind(this));
       },
@@ -111,6 +115,7 @@
     },
     components: {
       'entry-page': require('./components/entry-page.vue'),
+      'user-avatar': require('./components/user-avatar.vue'),
       'comment-item': require('./components/comment-item.vue')
     }
   };
@@ -137,6 +142,18 @@
     cursor: pointer;
     z-index: 9;
   }
+  .comment-form .avatar {
+    position: absolute;
+    top: 6px;
+    left: -48px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+  }
+  .comment-form .avatar img {
+    border-radius: 50%;
+  }
   .comment-form textarea {
     width: 100%;
     height: 4.2em;
@@ -150,6 +167,16 @@
   }
   .comment-form textarea:focus, .comment-form textarea.active {
     height: 12.6em;
+  }
+  .comment-form .count-left {
+    margin-left: 14px;
+    color: #999;
+  }
+  .comment-form .count-left .yellow {
+    color: #FFDC00;
+  }
+  .comment-form .count-left .red {
+    color: #FF4444;
   }
 
   .comment-box ul {
