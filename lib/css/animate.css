@@ -29,7 +29,9 @@
 .loading.logo .right-red {
   animation-delay: .8s;
 }
-
+.loading.center {
+  margin: 180px auto;
+}
 /* transition */
 .fade-transition {
   transition: all .2s ease-in-out;

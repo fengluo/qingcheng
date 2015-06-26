@@ -1,8 +1,8 @@
 <template>
-  <div class="entry-view">
+  <div class="entry-view" v-show="topic.id">
     <entry-page v-if="topic.id" topic="{{ topic }}"></entry-page>
   </div>
-  <div class="entry-view comment-box">
+  <div class="entry-view comment-box" v-show="topic.id">
     <div class="container">
       <form class="comment-form" v-on="submit: formSubmit" v-el="form">
         <div class="comment-form-mask" v-on="click: showLogin" v-if="!currentUser.id"></div>
@@ -18,6 +18,7 @@
       </ul>
     </div>
   </div>
+  <logo-loading class="center" v-if="!topic.id"></logo-loading>
 </template>
 
 <script>
@@ -115,6 +116,7 @@
     },
     components: {
       'entry-page': require('./components/entry-page.vue'),
+      'logo-loading': require('./components/logo-loading.vue'),
       'user-avatar': require('./components/user-avatar.vue'),
       'comment-item': require('./components/comment-item.vue')
     }

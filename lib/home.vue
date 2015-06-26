@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="body">
+  <div class="body" v-show="topics.length">
     <div class="split-view container">
       <div class="main-view">
         <div class="topic-list box-container">
@@ -29,7 +29,6 @@
               <a href="#">Explore</a>
             </nav>
           </div>
-          <logo-loading v-if="!topics.length"></logo-loading>
           <ul v-if="topics.length">
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
@@ -40,6 +39,8 @@
       </div>
     </div>
   </div>
+
+  <logo-loading class="center" v-if="!topics.length"></logo-loading>
 </template>
 
 <script>

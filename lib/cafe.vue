@@ -1,6 +1,6 @@
 <template>
   <cafe-header cafe="{{ cafe }}"></cafe-header>
-  <div class="body">
+  <div class="body" v-show="topics.length">
     <div class="split-view container">
       <div class="main-view">
         <div class="topic-list box-container">
@@ -11,8 +11,7 @@
               </select>
             </div>
           </div>
-          <logo-loading v-if="!topics.length"></logo-loading>
-          <ul v-if="topics.length">
+          <ul>
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
           <div v-if="pagination">
@@ -33,6 +32,8 @@
       </div>
     </div>
   </div>
+
+  <logo-loading class="center" v-if="!topics.length"></logo-loading>
 </template>
 
 <script>
