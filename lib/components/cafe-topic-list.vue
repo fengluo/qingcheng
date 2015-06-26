@@ -9,7 +9,7 @@
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
           <div v-if="pagination">
-            <a v-if="pagination.next" href="/c/{{ cafe.slug }}/{{ pagination.next }}">load more</a>
+            <a v-if="pagination.next" href="/c/{{ cafe.slug }}?page={{ pagination.next }}">load more</a>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
   var api = require('../api');
   module.exports = {
     replace: true,
-    props: ['cafe'],
+    props: ['cafe', 'page'],
     data: function() {
       return {
         pagination: {},
@@ -41,9 +41,12 @@
       }
     },
     watch: {
-      'cafe': function(cafe) {
-        if (!cafe || !cafe.slug) return;
+      'cafe.slug': function(slug) {
+        if (!slug) return;
         this.fetchTopics();
+      },
+      'page': function(page) {
+        this.fetchTopics(page);
       }
     },
     methods: {

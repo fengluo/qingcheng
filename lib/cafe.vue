@@ -1,7 +1,7 @@
 <template>
   <cafe-header cafe="{{ cafe }}"></cafe-header>
-  <component is="{{view}}" v-if="cafe.slug"
-    cafe="{{cafe}}"
+  <component is="{{subview}}" v-if="cafe.slug"
+    cafe="{{cafe}}" page="{{page}}"
     v-transition
     transition-mode="out-in">
   </component>
@@ -15,8 +15,15 @@
     props: ['params'],
     data: function() {
       return {
-        cafe: {},
-        view: 'cafe-topic-list',
+        cafe: {}
+      }
+    },
+    computed: {
+      subview: function() {
+        return this.params.subview || 'cafe-topic-list';
+      },
+      page: function() {
+        return this.params.query;
       }
     },
     watch: {
@@ -38,6 +45,7 @@
     },
     components: {
       'cafe-topic-list': require('./components/cafe-topic-list.vue'),
+      'cafe-user-list': require('./components/cafe-user-list.vue'),
       'cafe-header': require('./components/cafe-header.vue')
     }
   };

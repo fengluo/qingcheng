@@ -62,6 +62,7 @@ module.exports = {
 <style>
 .unfollow-button {
   width: 9.6em;
+  transition: background-color .2s ease;
 }
 .unfollow-button .unfollow-bg {
   display: none;
