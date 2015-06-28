@@ -43,6 +43,9 @@
         this.title = '';
         this.content = '';
       },
+      dismiss: function() {
+        this.$parent.showTopicForm = false;
+      },
       formSubmit: function(e) {
         e.preventDefault();
         var payload = {
@@ -55,7 +58,7 @@
           this.cleanData();
           resp.user = this.user;
           this.$parent.topics = [resp].concat(this.$parent.topics);
-          this.$parent.showTopicForm = false;
+          this.dismiss();
         }.bind(this))
       }
     },

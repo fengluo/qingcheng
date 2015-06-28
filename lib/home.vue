@@ -12,8 +12,8 @@
       <div class="container">
         <nav>
           <a href="/">Overview</a>
-          <a href="/c/site">Topics</a>
-          <a href="/c/about">Cafes</a>
+          <a href="/c/">Cafes</a>
+          <a href="/u/">Users</a>
         </nav>
       </div>
     </div>
