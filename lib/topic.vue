@@ -4,13 +4,7 @@
   </div>
   <div class="entry-view comment-box" v-show="topic.id">
     <div class="container">
-      <form class="comment-form" v-on="submit: formSubmit" v-el="form">
-        <div class="comment-form-mask" v-on="click: showLogin" v-if="!currentUser.id"></div>
-        <user-avatar user="{{ currentUser }}" v-if="currentUser.id"></user-avatar>
-        <textarea placeholder="Write your comment" v-model='commentInput' v-on="keydown: keybordSubmit" v-class="active: commentInput.length"></textarea>
-        <button v-if="currentUser.username">Reply</button>
-        <span class="count-left" v-if="commentLeft" v-html="commentLeft"></span>
-      </form>
+      <comment-form v-if="topic.id" topic="{{topic}}" v-on="comment-added: commentAdded"></comment-form>
       <div class="comment-list-header" v-if="comments.length">{{ topic.comment_count }} responses</div>
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
@@ -32,21 +26,8 @@
         topic: {},
         comments: [],
         cursor: 0,
-        commentInput: '',
         params: {}
       };
-    },
-    computed: {
-      currentUser: function() {
-        return this.$root.currentUser;
-      },
-      commentLeft: function() {
-        var num = 480 - this.commentInput.length;
-        if (num < 20) return '<span class="red">' + num + '</span>';
-        if (num < 30) return '<span class="yellow">' + num + '</span>';
-        if (num < 60) return num;
-        return 0;
-      }
     },
     watch: {
       'params.topicId': function(id) {
@@ -83,41 +64,15 @@
           }
         }.bind(this));
       },
-      keybordSubmit: function(e) {
-        if (e.keyCode !== 13) return;
-        var mac = /mac/i.test(navigator.userAgent);
-        if ((mac && !e.metaKey) || (!mac && !e.ctrlKey)) return;
-        this.postComment();
-      },
-      formSubmit: function(e) {
-        e && e.preventDefault();
-        this.postComment();
-      },
-      postComment: function() {
-        var content = this.commentInput.trim();
-        if (!content || 480 - content.length < 0) {
-          var form = this.$$.form;
-          form.classList.add('shake');
-          setTimeout(function() {
-            form.classList.remove('shake');
-          }, 1500)
-          return;
-        }
-
-        this.commentInput = '';
-        api.topic.reply(this.params.topicId, content, function(resp) {
-          this.topic.comment_count += 1;
-          this.comments = [resp].concat(this.comments);
-        }.bind(this));
-      },
-      showLogin: function() {
-        this.$root.showLogin = true;
+      commentAdded: function(comment) {
+        this.comments = [comment].concat(this.comments);
+        this.topic.comment_count += 1;
       }
     },
     components: {
       'entry-page': require('./components/entry-page.vue'),
       'logo-loading': require('./components/logo-loading.vue'),
-      'user-avatar': require('./components/user-avatar.vue'),
+      'comment-form': require('./components/comment-form.vue'),
       'comment-item': require('./components/comment-item.vue')
     }
   };
@@ -131,55 +86,7 @@
   .comment-box {
     padding-bottom: 60px;
   }
-  .comment-box .comment-form {
-    position: relative;
-    padding-bottom: 20px;
-  }
-  .comment-form .comment-form-mask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    cursor: pointer;
-    z-index: 9;
-  }
-  .comment-form .avatar {
-    position: absolute;
-    top: 6px;
-    left: -48px;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    border-radius: 50%;
-  }
-  .comment-form .avatar img {
-    border-radius: 50%;
-  }
-  .comment-form textarea {
-    width: 100%;
-    height: 4.2em;
-    padding: 10px 0;
-    border: none;
-    outline: none;
-    color: #565656;
-    line-height: 1.4;
-    resize: none;
-    transition: all 0.15s ease;
-  }
-  .comment-form textarea:focus, .comment-form textarea.active {
-    height: 12.6em;
-  }
-  .comment-form .count-left {
-    margin-left: 14px;
-    color: #999;
-  }
-  .comment-form .count-left .yellow {
-    color: #FFDC00;
-  }
-  .comment-form .count-left .red {
-    color: #FF4444;
-  }
+
 
   .comment-box ul {
     margin: 0;

@@ -1,11 +1,12 @@
 <template>
-  <li id="c-{{ comment.id }}" class="comment-item clearfix">
+  <li id="c-{{ comment.id }}" class="comment-item clearfix" v-show="comment.id" v-transition="fade">
     <user-avatar user="{{user}}"></user-avatar>
     <div class="comment-main">
       <div class="comment-info">
         <a href="/u/{{user.username}}">{{user.username}}</a>
         <time datetime="{{ comment.created_at }}">{{ comment.created_at | timeago }}</time>
         #{{ comment.id }}
+        <span role="button" class="delete-comment" v-if="isOwner" v-on="click: deleteComment">delete</span>
       </div>
       <div class="comment-content" v-html="comment.content"></div>
     </div>
@@ -19,6 +20,16 @@
     computed: {
       user: function() {
         return this.comment.user;
+      },
+      isOwner: function() {
+        return this.$root.currentUser.id === this.user.id;
+      }
+    },
+    methods: {
+      deleteComment: function() {
+        if (confirm('Are you sure to delete this comment?')) {
+          this.comment.id = null;
+        }
       }
     },
     components: {
@@ -39,10 +50,21 @@
   border-bottom: 1px solid #eee;
 }
 .comment-item .comment-info {
+  position: relative;
   font-size: 13px;
   color: #999;
   margin-bottom: 10px;
   line-height: 1;
+}
+.comment-item .delete-comment {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  opacity: 0.2;
+}
+.comment-item:hover .delete-comment {
+  opacity: 1;
 }
 .comment-item .comment-content {
   line-height: 1.4;
