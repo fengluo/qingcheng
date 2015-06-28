@@ -25,28 +25,47 @@
     data: function() {
       return {
         title: '',
-        content: ''
+        content: '',
+        feature_type: '',
+        feature_value: ''
       };
     },
     computed: {
       user: function() {
         return this.$root.currentUser;
+      },
+      prefix: function() {
+        return prefix = this.cafe.slug + ':topic:';
       }
     },
     methods: {
-      formSubmit: function() {
-        console.log(this.$data);
+      cleanData: function() {
+        this.title = '';
+        this.content = '';
+      },
+      formSubmit: function(e) {
+        e.preventDefault();
+        var payload = {
+          title: this.title,
+          content: this.content,
+          feature_type: this.feature_type,
+          feature_value: this.feature_value,
+        };
+        api.cafe.newTopic(this.cafe.slug, payload, function(resp) {
+          this.cleanData();
+          resp.user = this.user;
+          this.$parent.topics = [resp].concat(this.$parent.topics);
+          this.$parent.showTopicForm = false;
+        }.bind(this))
       }
     },
     compiled: function() {
-      var prefix = this.cafe.slug + ':topic:';
-      this.title = localStorage[prefix + 'title'] || '';
-      this.content = localStorage[prefix + 'content'] || '';
+      this.title = localStorage[this.prefix + 'title'] || '';
+      this.content = localStorage[this.prefix + 'content'] || '';
     },
     detached: function() {
-      var prefix = this.cafe.slug + ':topic:';
-      localStorage[prefix + 'title'] = this.title;
-      localStorage[prefix + 'content'] = this.content;
+      localStorage[this.prefix + 'title'] = this.title;
+      localStorage[this.prefix + 'content'] = this.content;
       document.body.classList.remove('no-scroll');
     },
     attached: function() {

@@ -14,8 +14,8 @@
         </div>
       </div>
 
-      <div class="sidebar-view">
-        <button class="new-topic" v-on="click: showTopicForm=true">New topic in this cafe</button>
+      <div class="sidebar-view" v-if="cafe.id">
+        <button class="new-topic" v-if="cafe.permission.write" v-on="click: showTopicForm=true">New topic in this cafe</button>
 
         <div class="widget box-container">
           <h3 class="widget-title">Widget title</h3>
@@ -43,8 +43,9 @@
     props: ['cafe', 'page'],
     data: function() {
       return {
+        cafe: {},
         pagination: {},
-        showTopicForm: true,
+        showTopicForm: false,
         topics: []
       }
     },
