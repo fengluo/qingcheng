@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  var api = require('../api');
   module.exports = {
     replace: true,
     props: ['comment'],
@@ -28,7 +29,10 @@
     methods: {
       deleteComment: function() {
         if (confirm('Are you sure to delete this comment?')) {
-          this.comment.id = null;
+          api.comment.delete(this.comment, function() {
+            this.comment.id = null;
+            this.$parent.topic.comment_count -= 1;
+          }.bind(this));
         }
       }
     },

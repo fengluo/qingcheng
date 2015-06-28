@@ -53,8 +53,10 @@
         }
 
         this.comment = '';
-        api.topic.reply(this.topic.id, content, function(resp) {
-          this.$emit('comment-added', resp);
+        var payload = {content: content};
+        api.comment.create(this.topic.id, payload, function(resp) {
+          this.$parent.comments = [resp].concat(this.$parent.comments);
+          this.$parent.topic.comment_count += 1;
         }.bind(this));
       },
       showLogin: function() {

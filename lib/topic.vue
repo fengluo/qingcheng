@@ -4,7 +4,7 @@
   </div>
   <div class="entry-view comment-box" v-show="topic.id">
     <div class="container">
-      <comment-form v-if="topic.id" topic="{{ topic }}" v-on="comment-added: commentAdded"></comment-form>
+      <comment-form v-if="topic.id" topic="{{ topic }}"></comment-form>
       <div class="comment-list-header" v-if="comments.length">{{ topic.comment_count }} responses</div>
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
@@ -63,10 +63,6 @@
             this.cursor = 0;
           }
         }.bind(this));
-      },
-      commentAdded: function(comment) {
-        this.comments = [comment].concat(this.comments);
-        this.topic.comment_count += 1;
       }
     },
     components: {
