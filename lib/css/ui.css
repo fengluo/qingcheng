@@ -123,6 +123,15 @@ a.button:hover, button:hover {
   z-index: 10;
   background-color: white;
 }
+.overlay-inner {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 860px;
+  height: 100%;
+  margin-left: -430px;
+  z-index: 11;
+}
 
 /* dropdown */
 .dropdown-caret {
@@ -138,10 +147,15 @@ a.button:hover, button:hover {
 }
 
 /* form */
+.form-description {
+  color: #999;
+  font-size: 13px;
+  margin-bottom: 2em;
+}
 .form-field {
   padding: 10px 0;
 }
-.form-field input {
+.form-field input, .form-field textarea {
   display: block;
   border: none;
   border-bottom: 1px solid #ddd;
@@ -151,8 +165,9 @@ a.button:hover, button:hover {
   color: #454545;
   font-family: "Source Sans Pro", "Lucida Grande", "Helvetica Neue", "Arial", sans-serif;
   transition: all 0.1s ease;
+  box-sizing: border-box;
 }
-.form-field input:focus {
+.form-field input:focus, .form-field textarea:focus {
   outline: none;
   border-color: #acacac;
 }

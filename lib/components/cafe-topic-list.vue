@@ -15,7 +15,7 @@
       </div>
 
       <div class="sidebar-view">
-        <a class="new-topic" href="#">New topic in this cafe</a>
+        <button class="new-topic" v-on="click: showTopicForm=true">New topic in this cafe</button>
 
         <div class="widget box-container">
           <h3 class="widget-title">Widget title</h3>
@@ -24,6 +24,13 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="overlay" v-if="showTopicForm" v-transition="fade">
+    <div class="overlay-mask" v-on="click: showTopicForm=false"></div>
+    <div class="overlay-inner">
+      <topic-form v-if="cafe.id" cafe="{{cafe}}"></topic-form>
     </div>
   </div>
   <logo-loading class="center" v-if="!topics.length"></logo-loading>
@@ -37,6 +44,7 @@
     data: function() {
       return {
         pagination: {},
+        showTopicForm: true,
         topics: []
       }
     },
@@ -61,13 +69,14 @@
     },
     components: {
       'topic-item': require('./topic-item.vue'),
+      'topic-form': require('./topic-form.vue'),
       'logo-loading': require("./logo-loading.vue")
     }
   }
 </script>
 
 <style>
-  a.new-topic {
+  button.new-topic {
     display: block;
     margin-bottom: 24px;
     box-sizing: border-box;
