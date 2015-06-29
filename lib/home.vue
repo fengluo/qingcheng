@@ -19,19 +19,14 @@
     </div>
   </div>
 
-  <div class="body" v-show="topics.length">
+  <div class="body">
     <div class="split-view container">
       <div class="main-view">
-        <div class="topic-list box-container">
-          <div class="topic-filters clearfix">
-            <nav class="filter-nav">
-              <a href="#">My Feed</a>
-              <a href="#">Explore</a>
-            </nav>
-          </div>
-          <ul v-if="topics.length">
+        <div class="topic-list">
+          <ul>
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
+          <logo-loading class="center" v-if="fetching"></logo-loading>
           <div class="load-more" v-if="cursor" v-on="click: fetchTopics(cursor)">
             Load More
           </div>
@@ -39,8 +34,6 @@
       </div>
     </div>
   </div>
-
-  <logo-loading class="center" v-if="!topics.length"></logo-loading>
 </template>
 
 <script>
@@ -51,16 +44,19 @@
     props: ['params'],
     data: function() {
       return {
+        fetching: true,
         cursor: 0,
         topics: []
       }
     },
     methods: {
       fetchTopics: function(cursor) {
+        this.fetching = true;
         cursor = cursor || this.params.cursor;
         api.timeline(cursor, function(resp) {
           this.cursor = resp.cursor;
           this.topics = this.topics.concat(resp.data);
+          this.fetching = false;
         }.bind(this));
       }
     },

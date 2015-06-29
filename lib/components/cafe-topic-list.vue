@@ -1,13 +1,16 @@
 <template>
-  <div class="body" v-if="topics.length">
+  <div class="body">
     <div class="split-view container">
       <div class="main-view">
-        <div class="topic-list box-container">
-          <div class="topic-filters clearfix">
-          </div>
+        <div v-if="canWrite" class="new-topic" v-on="click: showTopicForm=true">
+          <user-avatar user="{{ user }}"></user-avatar>
+          <span class="yue" role="button">Create a new topic here</span>
+        </div>
+        <div class="topic-list">
           <ul>
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
+          <logo-loading class="center" v-if="fetching"></logo-loading>
           <div v-if="pagination">
             <a v-if="pagination.next" href="/c/{{ cafe.slug }}?page={{ pagination.next }}">load more</a>
           </div>
@@ -15,13 +18,8 @@
       </div>
 
       <div class="sidebar-view" v-if="cafe.id">
-        <button class="new-topic" v-if="cafe.permission.write" v-on="click: showTopicForm=true">New topic in this cafe</button>
-
-        <div class="widget box-container">
-          <h3 class="widget-title">Widget title</h3>
-          <div class="widget-content">
-            Here is the content
-          </div>
+        <div class="sidebar-notice" v-if="!canWrite">
+          You have no permission in writing here.
         </div>
       </div>
     </div>
@@ -33,7 +31,6 @@
       <topic-form v-if="cafe.id" cafe="{{cafe}}"></topic-form>
     </div>
   </div>
-  <logo-loading class="center" v-if="!topics.length"></logo-loading>
 </template>
 
 <script>
@@ -46,7 +43,17 @@
         cafe: {},
         pagination: {},
         showTopicForm: false,
+        fetching: true,
         topics: []
+      }
+    },
+    computed: {
+      user: function() {
+        return this.$root.currentUser;
+      },
+      canWrite: function() {
+        var permission = this.cafe.permission || {};
+        return permission.write;
       }
     },
     watch: {
@@ -60,34 +67,40 @@
     },
     methods: {
       fetchTopics: function(page) {
-        this.topics = [];
-        this.pagination = {};
+        this.fetching = true;
         api.cafe.topics(this.cafe.slug, page, function(resp) {
           this.pagination = resp.pagination;
           this.topics = resp.data;
+          this.fetching = false;
         }.bind(this));
       },
     },
     components: {
       'topic-item': require('./topic-item.vue'),
       'topic-form': require('./topic-form.vue'),
+      'user-avatar': require('./user-avatar.vue'),
       'logo-loading': require("./logo-loading.vue")
     }
   }
 </script>
 
 <style>
-  button.new-topic {
-    display: block;
-    margin-bottom: 24px;
-    box-sizing: border-box;
-    font-size: 18px;
-    text-decoration: none;
-    text-align: center;
-    background-color: #42B983;
-    box-shadow: 0 3px 0 #36996C;
-    color: white;
-    font: normal 500 14px/42px "Helvetica Neue", "Arial", sans-serif;
-    border-radius: 5px;
+  .new-topic {
+    height: 6em;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  .new-topic .avatar {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    margin-right: 12px;
+  }
+  .new-topic .avatar img, .new-topic .avatar span {
+    border-radius: 50%;
+  }
+  .new-topic .yue {
+    color: #999;
   }
 </style>
