@@ -56,7 +56,6 @@
         };
         api.cafe.newTopic(this.cafe.slug, payload, function(resp) {
           this.cleanData();
-          resp.user = this.user;
           this.$parent.topics = [resp].concat(this.$parent.topics);
           this.dismiss();
         }.bind(this))
