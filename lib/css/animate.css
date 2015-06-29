@@ -58,3 +58,39 @@
 .shake {
   animation: shake .8s;
 }
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0.6;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce-out {
+  0% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+.bounce-enter {
+  animation: bounce-in .2s;
+}
+.bounce-leave {
+  animation: bounce-out .2s;
+}
