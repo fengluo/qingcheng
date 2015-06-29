@@ -1,5 +1,5 @@
 <template>
-  <li id="t-{{ topic.id }}" class="topic-item clearfix">
+  <li id="t-{{ topic.id }}" class="topic-item clearfix" v-show="topic.id" v-transition="fade">
     <span v-if="cafe" class="cafe-color" v-style="color"></span>
     <span class="user-avatar">
       <user-avatar user="{{user}}"></user-avatar>

@@ -16,9 +16,15 @@
           <a v-if="cafe.intro" href="/t/{{ cafe.intro }}">Introduction</a>
         </nav>
         <div class="header-actions" v-if="cafe.id">
-          <button v-if="!following" v-on="click:follow">Follow</button>
-          <button class="unfollow-button" v-if="following" v-on="click:unfollow">
-            <span class="unfollow-fg">Following</span>
+          <button class="follow-button" v-class="following-button: following" v-on="click: toggleFollow">
+            <span class="follow-fg">
+              <i class="qc-icon-star-empty"></i>
+              Follow
+            </span>
+            <span class="unfollow-fg">
+              <i class="qc-icon-star-full"></i>
+              Following
+            </span>
             <span class="unfollow-bg">Unfollow</span>
           </button>
         </div>
@@ -54,27 +60,39 @@ module.exports = {
       api.cafe.leave(this.cafe.slug, function() {
         this.cafe.membership = 'visitor';
       }.bind(this));
+    },
+    toggleFollow: function() {
+      if (this.following) {
+        this.unfollow();
+      } else {
+        this.follow();
+      }
     }
   }
 }
 </script>
 
 <style>
-.unfollow-button {
-  width: 9.6em;
+.follow-button {
+  min-width: 10em;
   transition: background-color .2s ease;
 }
-.unfollow-button .unfollow-bg {
+.unfollow-bg, .unfollow-fg {
   display: none;
 }
-.unfollow-button:hover {
-  background-color: #FF4444;
+.following-button .follow-fg {
+  display: none;
 }
-.unfollow-button:hover .unfollow-bg {
+.following-button .unfollow-fg {
   display: inline;
 }
-.unfollow-button:hover .unfollow-fg {
+.following-button:hover {
+  background-color: #FF4444;
+}
+.following-button:hover .unfollow-bg {
+  display: inline;
+}
+.following-button:hover .unfollow-fg {
   display: none;
 }
-
 </style>

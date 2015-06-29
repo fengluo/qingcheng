@@ -6,7 +6,10 @@
     <div class="form-field">
       <input placeholder="Your topic title" v-model="title">
     </div>
-    <div class="form-field">
+    <div class="form-field clearfix">
+      <a class="markdown-logo" v-class="fade-markdown-logo: content.length" title="Writing in Markdown" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="32" viewBox="0 0 208 128"><mask id="a"><rect width="100%" height="100%" fill="#fff"/><path d="M30 98v-68h20l20 25 20-25h20v68h-20v-39l-20 25-20-25v39zM155 98l-30-33h20v-35h20v35h20z"/></mask><rect width="100%" height="100%" ry="15" mask="url(#a)"/></svg>
+      </a>
       <textarea placeholder="What is in your mind" v-model="content"></textarea>
     </div>
     <div class="form-submit">
@@ -83,6 +86,19 @@
 <style>
 .topic-form {
   padding: 40px 110px 20px;
+}
+.topic-form .markdown-logo {
+  float: left;
+  display: block;
+  margin-left: -75px;
+  opacity: 0.84;
+  transition: all .2s ease;
+}
+.topic-form .fade-markdown-logo {
+  opacity: 0.08;
+}
+.topic-form .markdown-logo:hover {
+  opacity: 1;
 }
 .topic-form .form-field textarea {
   border: none;
