@@ -19,6 +19,7 @@
 
 <script>
   var api = require('../api');
+  var shake = require('../utils').shake;
   module.exports = {
     replace: true,
     props: ['cafe'],
@@ -49,11 +50,14 @@
       formSubmit: function(e) {
         e.preventDefault();
         var payload = {
-          title: this.title,
-          content: this.content,
+          title: this.title.trim(),
+          content: this.content.trim(),
           feature_type: this.feature_type,
           feature_value: this.feature_value,
         };
+        if (!payload.title | !payload.content) {
+          return shake(this.$$.form);
+        }
         api.cafe.newTopic(this.cafe.slug, payload, function(resp) {
           this.cleanData();
           this.$parent.topics = [resp].concat(this.$parent.topics);

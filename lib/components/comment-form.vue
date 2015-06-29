@@ -10,6 +10,7 @@
 
 <script>
   var api = require('../api');
+  var shake = require('../utils').shake;
   module.exports = {
     replace: true,
     props: ['topic'],
@@ -44,12 +45,7 @@
       postComment: function() {
         var content = this.comment.trim();
         if (!content || 480 - content.length < 0) {
-          var form = this.$$.form;
-          form.classList.add('shake');
-          setTimeout(function() {
-            form.classList.remove('shake');
-          }, 1500)
-          return;
+          return shake(this.$$.form);
         }
 
         this.comment = '';
