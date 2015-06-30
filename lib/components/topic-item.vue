@@ -13,8 +13,11 @@
       </div>
     </div>
     <div class="topic-counts">
-      <div class="count-wrap">
+      <div class="count-wrap" v-if="topic.like_count">
         {{ topic.like_count }}<span class="explain">likes</span>
+      </div>
+      <div class="count-wrap" v-if="!topic.like_count">
+        {{ topic.read_count }}<span class="explain">reads</span>
       </div>
       <div class="count-wrap">
         {{ topic.comment_count }}<span class="explain">replies</span>

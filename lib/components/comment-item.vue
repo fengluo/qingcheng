@@ -1,5 +1,5 @@
 <template>
-  <li id="c-{{ comment.id }}" class="comment-item clearfix" v-show="comment.id" v-transition="fade">
+  <li id="c-{{ comment.id }}" class="comment-item clearfix" v-show="comment.id" v-transition="fade" v-class="comment-hide: isHide">
     <user-avatar user="{{user}}"></user-avatar>
     <div class="comment-main">
       <div class="comment-info">
@@ -7,7 +7,7 @@
         <time datetime="{{ comment.created_at }}">{{ comment.created_at | timeago }}</time>
         #{{ comment.id }}
         <div class="comment-actions">
-          <i role="button" class="qc-icon-flag" v-if="!isOwner" v-on="click: flagComment" aria-label="flag comment"></i>
+          <i role="button" class="qc-icon-flag" v-if="!isOwner" v-on="click: flagComment" aria-label="report spam" title="report spam"></i>
           <i role="button" class="qc-icon-bin" v-if="isOwner" v-on="click: deleteComment" aria-label="delete comment"></i>
         </div>
       </div>
@@ -27,6 +27,9 @@
       },
       isOwner: function() {
         return this.$root.currentUser.id === this.user.id;
+      },
+      isHide: function() {
+        return this.comment.flag_count > 5;
       }
     },
     methods: {
@@ -39,7 +42,8 @@
         }
       },
       flagComment: function() {
-        if (confirm('Are you sure to flag this comment?')) {
+        if (confirm('Are you sure to report this comment?')) {
+          api.comment.flag(this.comment)
         }
       }
     },
@@ -113,5 +117,11 @@
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     color: #4c4c4c;
     background-color: #f9f9f7;
+  }
+  .comment-hide {
+    opacity: 0.2;
+  }
+  .comment-hide .comment-content {
+    font-size: 14px;
   }
 </style>

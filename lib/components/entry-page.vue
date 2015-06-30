@@ -8,7 +8,7 @@
     }
   </style>
 
-  <div class="hentry">
+  <div class="hentry" v-el="el">
     <div class="entry-cover cover" v-if="topicStyle" v-style="topicStyle">
       <div class="cover-inner">
         <div class="container">
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+  var api = require('../api');
   module.exports = {
     replace: true,
     props: ['topic'],
@@ -81,6 +82,55 @@
         }
         return rv;
       },
+      shouldBind: function() {
+        if (!this.$root.currentUser) return false;
+        return this.topic.read_by_me !== '100%';
+      }
+    },
+    methods: {
+      progress: function() {
+        var viewport = Math.max(
+          document.documentElement.clientHeight,
+          window.innerHeight || 0
+        );
+        var height = this.$$.el.clientHeight;
+        var percent = (window.scrollY + viewport * 0.8) / height * 100;
+        return Math.min(Math.round(percent), 100);
+      },
+      bind: function() {
+        var me = this;
+        if (!me.shouldBind) return;
+
+        var clock;
+        var record = function(e) {
+          clearTimeout(clock);
+          if (!me.shouldBind) {
+            return me.unbind();
+          }
+
+          clock = setTimeout(function() {
+            var percent = me.progress();
+            api.topic.read(me.topic.id, percent, function(resp) {
+              me.topic.read_by_me = resp.percent;
+            });
+          }, 1000);
+        };
+
+        me._bindFunc = record;
+        window.addEventListener('scroll', record)
+      },
+      unbind: function() {
+        if (this._bindFunc) {
+          window.removeEventListener('scroll', this._bindFunc);
+          this._bindFunc = null;
+        }
+      }
+    },
+    attached: function() {
+      this.bind();
+    },
+    detached: function() {
+      this.unbind();
     },
     components: {
       'user-avatar': require('./user-avatar.vue')

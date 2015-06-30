@@ -30,7 +30,7 @@
   animation-delay: .8s;
 }
 .loading.center {
-  margin: 180px auto;
+  margin: 100px auto;
 }
 /* transition */
 .fade-transition {
