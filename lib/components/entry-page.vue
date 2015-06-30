@@ -83,7 +83,7 @@
         return rv;
       },
       shouldBind: function() {
-        if (!this.$root.currentUser) return false;
+        if (!this.$root.currentUser.id) return false;
         return this.topic.read_by_me !== '100%';
       }
     },
