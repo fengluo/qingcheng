@@ -1,5 +1,5 @@
 <template>
-  <cafe-header></cafe-header>
+  <user-header user="{{ user }}"></user-header>
   <div class="body">
     <div class="split-view container">
       <div class="main-view">
@@ -10,19 +10,33 @@
 </template>
 
 <script>
+  var api = require('./api');
+
   module.exports = {
     replace: true,
     props: ['params'],
     data: function() {
       return {
-        user: {
-          username: 'lepture',
-          description: 'Love its people, but never trust its government.'
-        }
+        params: {},
+        user: {}
+      }
+    },
+    watch: {
+      'params.username': function(username) {
+        if (!username) return;
+        this.fetchUser(username);
+      }
+    },
+    methods: {
+      fetchUser: function(username) {
+        api.user.profile(username, function(resp) {
+          console.log(resp);
+          this.user = resp;
+        }.bind(this));
       }
     },
     components: {
-      'cafe-header': require('./components/cafe-header.vue')
+      'user-header': require('./components/user-header.vue')
     }
   };
 </script>

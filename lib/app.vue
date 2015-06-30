@@ -35,7 +35,7 @@
     <div class="container">
       <div style="float: left">Copyright &copy; {{year}} {{$site.name}}</div>
       <div style="float: right">
-        <a href="https://zerqu.com">ZERQU</a> •
+        <a href="https://github.com/zerqu">ZERQU</a> •
         <a href="https://github.com/zerqu/qingcheng">青城</a>
       </div>
     </div>
