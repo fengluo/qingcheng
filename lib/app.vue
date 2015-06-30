@@ -72,6 +72,8 @@
       'cafe': require('./cafe.vue'),
       'topic': require('./topic.vue'),
       'user': require('./user.vue'),
+      'cafe-list': require('./cafe-list.vue'),
+      'user-list': require('./user-list.vue'),
       'user-avatar': require('./components/user-avatar.vue'),
       'login-dialog': require('./components/login-dialog.vue')
     }

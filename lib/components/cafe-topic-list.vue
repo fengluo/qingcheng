@@ -79,7 +79,7 @@
       'topic-item': require('./topic-item.vue'),
       'topic-form': require('./topic-form.vue'),
       'user-avatar': require('./user-avatar.vue'),
-      'logo-loading': require("./logo-loading.vue")
+      'logo-loading': require('./logo-loading.vue')
     }
   }
 </script>
