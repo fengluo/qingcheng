@@ -17,9 +17,9 @@
 
       <div class="site-account">
         <button v-if="!currentUser.username" v-on="click: showLogin=true">Log in</button>
-        <div class="site-login-user" v-if="currentUser.username" v-on="click: userPopup">
+        <div class="site-login-user" v-if="currentUser.username">
+          <span class="logout-button" v-on="click: logout" role="button">Logout</span>
           <user-avatar user="{{currentUser}}"></user-avatar>
-          <span class="dropdown-caret"></span>
         </div>
       </div>
     </div>
@@ -61,10 +61,6 @@
     methods: {
       logout: function() {
         require('./api').user.logout();
-      },
-      userPopup: function(e) {
-        e.preventDefault();
-        console.log('hello')
       }
     },
     components: {
@@ -93,5 +89,10 @@
 }
 .site-login-user .avatar span {
   font-size: 16px;
+}
+.site-login-user .logout-button {
+  font-size: 14px;
+  color: #999;
+  margin-right: 1em;
 }
 </style>

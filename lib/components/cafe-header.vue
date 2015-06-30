@@ -15,7 +15,7 @@
           <a href="/c/{{ cafe.slug }}/members">Members</a>
           <a v-if="cafe.intro" href="/t/{{ cafe.intro }}">Introduction</a>
         </nav>
-        <div class="header-actions" v-if="cafe.id">
+        <div class="header-actions" v-if="showFollowing">
           <button class="follow-button" v-class="following-button: following" v-on="click: toggleFollow">
             <span class="follow-fg">
               <i class="qc-icon-star-empty"></i>
@@ -42,6 +42,9 @@ module.exports = {
     return {loading: false};
   },
   computed: {
+    showFollowing: function() {
+      return this.cafe.id && this.$root.currentUser.id;
+    },
     style: function() {
       var style = this.cafe.style;
       if (!style || !style.cover) return {};

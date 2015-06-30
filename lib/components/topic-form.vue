@@ -4,10 +4,10 @@
       New topic in <a href="/c/{{ cafe.slug }}"/>{{ cafe.name }}</a>
     </div>
     <div class="form-field">
-      <input placeholder="Your topic title" v-model="title">
+      <input placeholder="Your topic title" v-model="title" v-el="title">
     </div>
     <div class="form-field clearfix">
-      <a class="markdown-logo" v-class="fade-markdown-logo: hasContent" title="Writing in Markdown" href="#">
+      <a class="markdown-logo" v-class="fade-markdown-logo: hasContent" title="Writing in Markdown" href="#" tabindex="-1">
         <svg xmlns="http://www.w3.org/2000/svg" width="52" height="32" viewBox="0 0 208 128"><mask id="a"><rect width="100%" height="100%" fill="#fff"/><path d="M30 98v-68h20l20 25 20-25h20v68h-20v-39l-20 25-20-25v39zM155 98l-30-33h20v-35h20v35h20z"/></mask><rect width="100%" height="100%" ry="15" mask="url(#a)"/></svg>
       </a>
       <textarea placeholder="What is in your mind" v-model="content"></textarea>
@@ -74,6 +74,7 @@
     compiled: function() {
       this.title = localStorage[this.prefix + 'title'] || '';
       this.content = localStorage[this.prefix + 'content'] || '';
+      console.log('compile')
     },
     detached: function() {
       localStorage[this.prefix + 'title'] = this.title;
@@ -82,6 +83,13 @@
     },
     attached: function() {
       document.body.classList.add('no-scroll');
+      console.log('attached')
+    },
+    ready: function() {
+      var el = this.$$.title;
+      setTimeout(function() {
+        el.focus();
+      }, 20);
     }
   }
 </script>

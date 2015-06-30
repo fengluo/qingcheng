@@ -2,9 +2,9 @@
   <div class="body">
     <div class="split-view container">
       <div class="main-view">
-        <div v-if="canWrite" class="new-topic" v-on="click: showTopicForm=true">
+        <div v-if="canWrite" class="new-topic">
           <user-avatar user="{{ user }}"></user-avatar>
-          <span class="yue" role="button">Create a new topic here</span>
+          <span class="yue" role="button" v-on="click: showTopicForm=true">Create a new topic here</span>
         </div>
         <div class="topic-list">
           <ul>

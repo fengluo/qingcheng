@@ -4,7 +4,7 @@
     <div class="login-form" v-class="shake: error">
       <form action="/session" method="post" v-on="submit: login">
         <div class="form-field">
-          <input type="text" placeholder="Username" name="username" v-model="username" required>
+          <input type="text" placeholder="Username" name="username" v-model="username" required v-el="username">
         </div>
         <div class="form-field">
           <input type="password" placeholder="Password" name="password" v-model="password" required>
@@ -56,6 +56,12 @@
     },
     detached: function() {
       document.body.classList.remove('no-scroll');
+    },
+    ready: function() {
+      var el = this.$$.username;
+      setTimeout(function() {
+        el.focus();
+      }, 20);
     },
     attached: function() {
       document.body.classList.add('no-scroll');
