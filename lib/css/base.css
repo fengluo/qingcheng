@@ -186,3 +186,21 @@ nav a:hover {
   font-size: 14px;
   border-bottom: 1px solid #eee;
 }
+
+.section {
+  padding-bottom: 40px;
+}
+.section .section-title {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .1px;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  color: #999;
+  border-bottom: 1px solid #ddd;
+}
+.section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

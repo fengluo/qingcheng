@@ -1,7 +1,7 @@
 <template>
-  <div class="body">
-    <div class="members container" v-if="admins.length">
-      <h2>Moderators</h2>
+  <div class="body members">
+    <div class="section container" v-if="admins.length">
+      <h2 class="section-title">Moderators</h2>
       <ul>
         <li v-repeat="user: admins">
           <user-avatar user="{{user}}"></user-avatar>
@@ -12,8 +12,8 @@
         </li>
       </ul>
     </div>
-    <div class="members container" v-if="members.length">
-      <h2>Members</h2>
+    <div class="section container" v-if="members.length">
+      <h2 class="section-title">Members</h2>
       <ul>
         <li v-repeat="members">
           <user-avatar user="{{user}}"></user-avatar>
@@ -64,24 +64,10 @@
 </script>
 
 <style>
-  .members {
+  .members .section {
     padding-top: 10px;
     padding-bottom: 40px;
     color: #565656;
-  }
-  .members h2 {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: .1px;
-    text-transform: uppercase;
-    margin: 0 0 20px;
-    color: #999;
-    border-bottom: 1px solid #ddd;
-  }
-  .members ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
   }
   .members .avatar {
     width: 48px;
