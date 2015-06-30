@@ -38,6 +38,9 @@ var api = require('../api');
 module.exports = {
   replace: true,
   props: ['cafe'],
+  data: function() {
+    return {loading: false};
+  },
   computed: {
     style: function() {
       var style = this.cafe.style;
@@ -45,27 +48,33 @@ module.exports = {
       return {'background-image': 'url(' + style.cover + ')'};
     },
     following: function() {
-      var role = this.cafe.membership;
-      if (!role) return false;
-      return role != 'visitor';
+      return this.cafe.membership != 'visitor';
     }
   },
   methods: {
     follow: function() {
+      this.loading = true;
       api.cafe.join(this.cafe.slug, function() {
         this.cafe.membership = 'subscriber';
+        this.loading = false;
       }.bind(this));
     },
     unfollow: function() {
+      this.loading = true;
       api.cafe.leave(this.cafe.slug, function() {
         this.cafe.membership = 'visitor';
+        this.loading = false;
       }.bind(this));
     },
     toggleFollow: function() {
+      if (this.loading) return;
+
       if (this.following) {
         this.unfollow();
+        this.cafe.membership = 'visitor';
       } else {
         this.follow();
+        this.cafe.membership = 'subscriber';
       }
     }
   }
