@@ -3,8 +3,8 @@
     <div class="header-cover cover">
       <div class="header-intro cover-inner">
         <div class="container">
-          <h2>ZERQU</h2>
-          <p>ZERQU is not a forum, it is an API based application.</p>
+          <h2>{{ $site.name }}</h2>
+          <p>{{ $site.description }}</p>
         </div>
       </div>
     </div>
