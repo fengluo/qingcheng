@@ -28,7 +28,7 @@
   <div class="overlay" v-if="showTopicForm" v-transition="bounce">
     <div class="overlay-mask" v-on="click: showTopicForm=false"></div>
     <div class="overlay-inner">
-      <topic-form v-if="cafe.id" cafe="{{cafe}}"></topic-form>
+      <topic-form v-if="cafe.id" cafe="{{cafe}}" type="create"></topic-form>
     </div>
   </div>
 </template>

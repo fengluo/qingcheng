@@ -29,11 +29,14 @@
 
       <div class="entry-content yue" v-html="topic.content"></div>
 
-      <div class="entry-actions">
+      <div class="entry-actions clearfix">
         <button class="white like-button" v-class="liked: topic.liked_by_me" v-on="click: toggleLike">
           <i class="qc-icon-heart"></i>
           <span>Like it</span>
         </button>
+        <div class="more-actions">
+          <button class="circle" v-on="click: editTopic" v-if="canEdit">Edit</button>
+        </div>
       </div>
 
       <div class="entry-footer clearfix">
@@ -62,6 +65,13 @@
       </div>
     </div>
   </div>
+
+  <div class="overlay" v-if="showTopicForm" v-transition="bounce">
+    <div class="overlay-mask" v-on="click: showTopicForm=false"></div>
+    <div class="overlay-inner">
+      <topic-form v-if="cafe.id" cafe="{{cafe}}" type="update" topic="{{rawTopic}}"></topic-form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -69,6 +79,13 @@
   module.exports = {
     replace: true,
     props: ['topic'],
+    data: function() {
+      return {
+        topic: {},
+        rawTopic: {},
+        showTopicForm: false
+      }
+    },
     computed: {
       cafe: function() {
         return this.topic.cafe;
@@ -76,8 +93,8 @@
       user: function() {
         return this.topic.user;
       },
-      isAuthor: function() {
-        return this.$root.currentUser.id == this.user.id;
+      canEdit: function() {
+        return this.topic.permission_edit;
       },
       topicStyle: function() {
         var cover = this.topic.info.cover;
@@ -111,6 +128,13 @@
             this.topic.liked_by_me = true;
           }.bind(this));
         }
+      },
+      editTopic: function() {
+        if (!this.canEdit) return;
+        api.topic.viewRaw(this.topic.id, function(resp) {
+          this.rawTopic = resp;
+          this.showTopicForm = true;
+        }.bind(this));
       },
       progress: function() {
         var viewport = Math.max(
@@ -157,13 +181,14 @@
       this.unbind();
     },
     components: {
+      'topic-form': require('./topic-form.vue'),
       'user-avatar': require('./user-avatar.vue')
     }
   }
 </script>
 
 <style>
-  .cafe-logo {
+  .hentry .cafe-logo {
     display: inline-block;
     vertical-align: middle;
     background-repeat: no-repeat;
@@ -214,6 +239,9 @@
   }
   .entry-actions .liked .qc-icon-heart {
     color: red;
+  }
+  .entry-actions .more-actions {
+    float: right;
   }
   .entry-footer {
     border-top: 1px solid #ececec;
