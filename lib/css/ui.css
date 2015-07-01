@@ -137,6 +137,7 @@ a.button:hover, button:hover {
   height: 100%;
   z-index: 10;
   background-color: white;
+  cursor: pointer;
 }
 .overlay-inner {
   position: absolute;

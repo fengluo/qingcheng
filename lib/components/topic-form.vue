@@ -7,7 +7,7 @@
       <input placeholder="Your topic title" v-model="title" v-el="title">
     </div>
     <div class="form-field clearfix">
-      <a class="markdown-logo" v-class="fade-markdown-logo: hasContent" title="Writing in Markdown" href="#" tabindex="-1">
+      <a class="markdown-logo" v-class="fade-markdown-logo: hasContent" title="Writing in Markdown" href="http://daringfireball.net/projects/markdown/" tabindex="-1" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" width="52" height="32" viewBox="0 0 208 128"><mask id="a"><rect width="100%" height="100%" fill="#fff"/><path d="M30 98v-68h20l20 25 20-25h20v68h-20v-39l-20 25-20-25v39zM155 98l-30-33h20v-35h20v35h20z"/></mask><rect width="100%" height="100%" ry="15" mask="url(#a)"/></svg>
       </a>
       <textarea placeholder="What is in your mind" v-model="content"></textarea>
@@ -53,6 +53,11 @@
       dismiss: function() {
         this.$parent.showTopicForm = false;
       },
+      esc: function(e) {
+        if (e.keyCode === 27) {
+          this.dismiss();
+        }
+      },
       formSubmit: function(e) {
         e.preventDefault();
         var payload = {
@@ -74,16 +79,16 @@
     compiled: function() {
       this.title = localStorage[this.prefix + 'title'] || '';
       this.content = localStorage[this.prefix + 'content'] || '';
-      console.log('compile')
     },
     detached: function() {
       localStorage[this.prefix + 'title'] = this.title;
       localStorage[this.prefix + 'content'] = this.content;
       document.body.classList.remove('no-scroll');
+      this.$$.form.removeEventListener('keyup', this.esc);
     },
     attached: function() {
       document.body.classList.add('no-scroll');
-      console.log('attached')
+      this.$$.form.addEventListener('keyup', this.esc);
     },
     ready: function() {
       var el = this.$$.title;
