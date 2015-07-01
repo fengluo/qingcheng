@@ -37,7 +37,7 @@
     methods: {
       fetchCafe: function() {
         this.cafe = {slug: this.params.slug};
-        api.cafe.profile(this.params.slug, function(resp) {
+        api.cafe.view(this.params.slug, function(resp) {
           this.cafe = resp;
           document.title = this.$site.name + ' — ' + this.cafe.name;
         }.bind(this));
