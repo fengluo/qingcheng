@@ -29,6 +29,13 @@
 
       <div class="entry-content yue" v-html="topic.content"></div>
 
+      <div class="entry-actions">
+        <button class="white like-button" v-class="liked: topic.liked_by_me" v-on="click: toggleLike">
+          <i class="qc-icon-heart"></i>
+          <span>Like it</span>
+        </button>
+      </div>
+
       <div class="entry-footer clearfix">
         <div class="topic-cafe column" v-if="cafe.slug">
           <div class="column-title">Published In</div>
@@ -69,6 +76,9 @@
       user: function() {
         return this.topic.user;
       },
+      isAuthor: function() {
+        return this.$root.currentUser.id == this.user.id;
+      },
       topicStyle: function() {
         var cover = this.topic.info.cover;
         if (!cover) return null;
@@ -88,6 +98,20 @@
       }
     },
     methods: {
+      toggleLike: function() {
+        if (!this.$root.currentUser.id) {
+          return this.$root.showLogin = true;
+        }
+        if (this.topic.liked_by_me) {
+          api.topic.unlike(this.topic.id, function() {
+            this.topic.liked_by_me = false;
+          }.bind(this));
+        } else {
+          api.topic.like(this.topic.id, function() {
+            this.topic.liked_by_me = true;
+          }.bind(this));
+        }
+      },
       progress: function() {
         var viewport = Math.max(
           document.documentElement.clientHeight,
@@ -177,6 +201,19 @@
     width: 1.5em;
     height: 1.5em;
     margin-right: 0.2em;
+  }
+  .entry-actions {
+    margin-top: 2em;
+  }
+  .entry-actions .like-button {
+    outline: none;
+    font-size: 16px;
+  }
+  .entry-actions .like-button .qc-icon-heart {
+    margin-right: 4px;
+  }
+  .entry-actions .liked .qc-icon-heart {
+    color: red;
   }
   .entry-footer {
     border-top: 1px solid #ececec;

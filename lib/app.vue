@@ -16,9 +16,11 @@
       </div>
 
       <div class="site-account">
-        <button v-if="!currentUser.username" v-on="click: showLogin=true">Log in</button>
-        <div class="site-login-user" v-if="currentUser.username">
-          <span class="logout-button" v-on="click: logout" role="button">Logout</span>
+        <div class="site-account-inner" v-if="!currentUser.username">
+          <button v-on="click: showLogin=true">Log in</button>
+        </div>
+        <div class="site-account-inner" v-if="currentUser.username">
+          <button class="circle" v-on="click: logout">Logout</button>
           <user-avatar user="{{currentUser}}"></user-avatar>
         </div>
       </div>
@@ -75,24 +77,3 @@
     }
   }
 </script>
-
-<style>
-.site-login-user {
-  margin-top: 14px;
-  display: inline-block;
-  cursor: pointer;
-}
-.site-login-user .avatar {
-  width: 28px;
-  height: 28px;
-  line-height: 28px;
-}
-.site-login-user .avatar span {
-  font-size: 16px;
-}
-.site-login-user .logout-button {
-  font-size: 14px;
-  color: #999;
-  margin-right: 1em;
-}
-</style>

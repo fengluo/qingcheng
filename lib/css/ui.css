@@ -8,6 +8,21 @@ a.button, button {
   border-radius: 32px;
   border: none;
 }
+a.button.circle, button.circle {
+  background-color: white;
+  line-height: 28px;
+  border: 2px solid #efefef;
+  color: #999;
+  font-weight: 500;
+}
+a.button.white, button.white {
+  background: white;
+  color: #999;
+  padding: 0 2px;
+}
+a.button.green, button.green {
+  background-color: #42B983;
+}
 a.button.red, button.red {
   background-color: #FF4444;
 }
@@ -182,4 +197,3 @@ a.button:hover, button:hover {
 .form-submit {
   padding-top: 20px;
 }
-
