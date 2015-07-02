@@ -122,3 +122,29 @@
     }
   }
 </script>
+
+<style>
+.topic-form {
+  padding: 40px 110px 20px;
+}
+.topic-form .markdown-logo {
+  float: left;
+  display: block;
+  margin-left: -75px;
+  opacity: 0.84;
+  transition: all .2s ease;
+}
+.topic-form .fade-markdown-logo {
+  opacity: 0.08;
+}
+.topic-form .markdown-logo:hover {
+  opacity: 1;
+}
+.topic-form .form-field textarea {
+  border: none;
+  height: 24em;
+}
+.topic-form .form-field input, .topic-form .form-field textarea {
+  font-family: "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
+}
+</style>
