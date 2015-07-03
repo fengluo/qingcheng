@@ -16,7 +16,7 @@
           <a v-if="cafe.intro" href="/t/{{ cafe.intro }}">Introduction</a>
         </nav>
         <div class="header-actions" v-if="showFollowing">
-          <button class="follow-button" v-class="following-button: following" v-on="click: toggleFollow">
+          <button class="follow-button" v-class="following-button: isFollowing" v-on="click: toggleFollow">
             <span class="follow-fg">
               <i class="qc-icon-star-empty"></i>
               Follow
@@ -39,7 +39,16 @@ module.exports = {
   replace: true,
   props: ['cafe'],
   data: function() {
-    return {loading: false};
+    return {
+      loading: false,
+      isFollowing: false
+    };
+  },
+  compiled: function() {
+    var role = this.cafe.membership;
+    if (['subscriber', 'member', 'admin'].indexOf(role) !== -1) {
+      this.isFollowing = true;
+    }
   },
   computed: {
     showFollowing: function() {
@@ -49,35 +58,30 @@ module.exports = {
       var style = this.cafe.style;
       if (!style || !style.cover) return {};
       return {'background-image': 'url(' + style.cover + ')'};
-    },
-    following: function() {
-      return this.cafe.membership != 'visitor';
     }
   },
   methods: {
     follow: function() {
       this.loading = true;
       api.cafe.join(this.cafe.slug, function() {
-        this.cafe.membership = 'subscriber';
+        this.isFollowing = true;
         this.loading = false;
       }.bind(this));
     },
     unfollow: function() {
       this.loading = true;
       api.cafe.leave(this.cafe.slug, function() {
-        this.cafe.membership = 'visitor';
+        this.isFollowing = false;
         this.loading = false;
       }.bind(this));
     },
     toggleFollow: function() {
       if (this.loading) return;
 
-      if (this.following) {
+      if (this.isFollowing) {
         this.unfollow();
-        this.cafe.membership = 'visitor';
       } else {
         this.follow();
-        this.cafe.membership = 'subscriber';
       }
     }
   }

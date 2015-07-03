@@ -185,15 +185,21 @@ nav a:hover {
   margin-bottom: 1.2em;
 }
 /* widget */
+.widget {
+  color: #999;
+}
 .widget h2, .widget h3, .widget h4 {
   margin: 0;
 }
-.widget-title, .widget-content {
+.widget .widget-content {
   margin: 0;
-  padding: 10px;
 }
-.widget-title {
+.widget .widget-title {
+  margin: 0;
   font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  text-transform: uppercase;
   border-bottom: 1px solid #eee;
 }
 

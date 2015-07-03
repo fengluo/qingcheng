@@ -21,6 +21,14 @@
         <div class="sidebar-notice" v-if="!canWrite">
           You have no permission in writing here.
         </div>
+
+        <div class="widget" v-if="isAdmin">
+          <h3 class="widget-title">Admin</h3>
+          <div class="widget-content">
+            <p>You are the admin here.</p>
+            <a class="button circle">View Settings</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -54,6 +62,10 @@
       canWrite: function() {
         var permission = this.cafe.permission || {};
         return permission.write;
+      },
+      isAdmin: function() {
+        var permission = this.cafe.permission || {};
+        return permission.admin;
       }
     },
     watch: {
