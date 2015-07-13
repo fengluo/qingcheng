@@ -70,9 +70,6 @@
     color: #565656;
   }
   .members .avatar {
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
     float: left;
     margin-right: 14px;
   }

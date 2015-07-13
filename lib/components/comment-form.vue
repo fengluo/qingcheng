@@ -1,7 +1,7 @@
 <template>
   <form class="comment-form" v-on="submit: formSubmit" v-el="form">
     <div class="comment-form-mask" v-on="click: showLogin" v-if="!user.id"></div>
-    <user-avatar user="{{ user }}" v-if="user.id"></user-avatar>
+    <user-avatar user="{{ user }}" v-if="user.id" class="small circle"></user-avatar>
     <textarea placeholder="Write your response" v-model='comment' v-on="keydown: keybordSubmit" v-class="active: comment.length"></textarea>
     <button v-if="user.id">Reply</button>
     <span class="comment-form-count" v-if="count" v-html="count"></span>
@@ -84,12 +84,6 @@
     position: absolute;
     top: 6px;
     left: -48px;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    border-radius: 50%;
-  }
-  .comment-form .avatar img {
     border-radius: 50%;
   }
   .comment-form textarea {

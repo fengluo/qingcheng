@@ -3,7 +3,7 @@
     <div class="split-view container">
       <div class="main-view">
         <div v-if="canWrite" class="new-topic">
-          <user-avatar user="{{ user }}"></user-avatar>
+          <user-avatar user="{{ user }}" class="small circle"></user-avatar>
           <span class="yue" role="button" v-on="click: showTopicForm=true">Create a new topic here</span>
         </div>
         <div class="topic-list">
@@ -105,13 +105,7 @@
     border-bottom: 1px solid #eee;
   }
   .new-topic .avatar {
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
     margin-right: 12px;
-  }
-  .new-topic .avatar img, .new-topic .avatar span {
-    border-radius: 50%;
   }
   .new-topic .yue {
     color: #999;

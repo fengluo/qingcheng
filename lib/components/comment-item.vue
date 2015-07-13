@@ -92,9 +92,6 @@
   .comment-item .avatar {
     float: left;
     margin-right: 12px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
   }
   .comment-content p {
     margin: 10px 0;

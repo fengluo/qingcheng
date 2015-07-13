@@ -40,6 +40,14 @@
   .avatar {
     display: inline-block;
     text-decoration: none;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+  }
+  .avatar.small {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
   }
   .avatar:hover {
     opacity: 0.8;
@@ -53,5 +61,11 @@
     font-size: 24px;
     border-radius: 3px;
     vertical-align: top;
+  }
+  .avatar.small span {
+    font-size: 18px;
+  }
+  .avatar.circle span, .avatar.circle img {
+    border-radius: 50%;
   }
 </style>

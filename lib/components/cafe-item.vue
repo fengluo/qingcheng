@@ -5,7 +5,7 @@
         <h3>{{ cafe.name }}</h3>
       </div>
     </a>
-    <user-avatar user="{{cafe.user}}"></user-avatar>
+    <user-avatar user="{{cafe.user}}" class="small circle"></user-avatar>
     <div class="card-footer">
       <div class="card-description" v-html="description|urlize"></div>
     </div>
@@ -45,14 +45,9 @@
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .card .avatar {
-  width: 36px;
-  height: 36px;
-  line-height: 36px;
-  border-radius: 50%;
   position: absolute;
   top: 10px;
   right: 10px;
-  overflow: hidden;
 }
 .card-cover {
   position: relative;

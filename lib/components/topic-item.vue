@@ -77,11 +77,6 @@
     padding: 0 10px 0 12px;
     vertical-align: top;
   }
-  .topic-item .avatar {
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-  }
   .topic-item .topic-info {
     display: inline-block;
     width: 540px;
