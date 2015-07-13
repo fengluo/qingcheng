@@ -47,10 +47,11 @@
     replace: true,
     props: ['cafe', 'page'],
     data: function() {
+      var showTopicForm = location.href.indexOf('?new') !== -1;
       return {
         cafe: {},
         pagination: {},
-        showTopicForm: false,
+        showTopicForm: showTopicForm,
         fetching: true,
         topics: []
       }
