@@ -3,14 +3,14 @@
     <div class="section container" v-if="following.length">
       <h2 class="section-title">Following</h2>
       <div class="cafe-cards clearfix">
-        <cafe-item v-repeat="cafe: following" track-by="id"></cafe-item>
+        <cafe-card v-repeat="cafe: following" track-by="id"></cafe-card>
       </div>
     </div>
 
     <div class="section container">
       <h2 class="section-title">Cafes</h2>
       <div class="cafe-cards">
-        <cafe-item v-repeat="cafe: cafes" track-by="id"></cafe-item>
+        <cafe-card v-repeat="cafe: cafes" track-by="id"></cafe-card>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@ module.exports ={
     }.bind(this));
   },
   components: {
-    'cafe-item': require('./components/cafe-item.vue'),
+    'cafe-card': require('./components/cafe-card.vue'),
     'logo-loading': require('./components/logo-loading.vue')
   }
 };

@@ -34,6 +34,59 @@ a.button:hover, button:hover {
   opacity: 0.8;
 }
 
+/* cover */
+.cover {
+  position: relative;
+  color: white;
+  background: rgba(0, 0, 0, 0.8) no-repeat center center;
+  background-size: cover;
+}
+.cover-inner {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding: 20px 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.35));
+}
+
+/* card */
+.card {
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin: 0 14px 18px 0;
+  width: 300px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.card .cover {
+  display: block;
+  height: 120px;
+  width: 100%;
+}
+.card .card-title {
+  margin: 0;
+  padding: 0 14px;
+  color: white;
+  font-weight: 400;
+}
+.card-footer {
+  height: 40px;
+}
+.card-footer .card-description {
+  padding: 0 10px;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  color: #565655;
+  line-height: 40px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
 /* logo loading */
 .logo {
   width: 46px;

@@ -92,21 +92,7 @@ nav a:hover {
 }
 
 /* layout: header */
-.cover {
-  position: relative;
-  color: white;
-  background: rgba(0, 0, 0, 0.8) no-repeat center center;
-  background-size: cover;
-}
-.cover-inner {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  padding: 20px 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.35));
-}
-.header-cover {
+.header .header-cover {
   height: 240px;
   background-image: url(https://dn-yuehu.qbox.me/cover/editors-picks/q8Up172j5piiqQvu.jpg/cover);
 }
