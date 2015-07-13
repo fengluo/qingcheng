@@ -2,16 +2,16 @@
   <div class="body cafe-list" v-if="!fetching">
     <div class="section container" v-if="following.length">
       <h2 class="section-title">Following</h2>
-      <ul>
+      <div class="cafe-cards clearfix">
         <cafe-item v-repeat="cafe: following" track-by="id"></cafe-item>
-      </ul>
+      </div>
     </div>
 
     <div class="section container">
       <h2 class="section-title">Cafes</h2>
-      <ul>
+      <div class="cafe-cards">
         <cafe-item v-repeat="cafe: cafes" track-by="id"></cafe-item>
-      </ul>
+      </div>
     </div>
   </div>
   <logo-loading class="center" v-if="fetching"></logo-loading>
