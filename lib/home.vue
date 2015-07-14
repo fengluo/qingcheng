@@ -32,12 +32,16 @@
           </div>
         </div>
       </div>
+      <div class="sidebar-view">
+        <div class="site-sidebar" v-html="sidebar" v-if="sidebar"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   var api = require('./api');
+  var zerqu = window.ZERQU || {};
 
   module.exports = {
     replace: true,
@@ -46,6 +50,7 @@
       return {
         fetching: true,
         cursor: 0,
+        sidebar: zerqu.sidebar,
         topics: []
       }
     },
