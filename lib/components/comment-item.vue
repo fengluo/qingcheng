@@ -1,7 +1,7 @@
 <template>
-  <li id="c-{{ comment.id }}" class="comment-item clearfix" v-show="comment.id" v-transition="fade" v-class="comment-hide: isHide">
+  <li id="c-{{ comment.id }}" class="comment-item item-container" v-show="comment.id" v-transition="fade" v-class="comment-hide: isHide">
     <user-avatar user="{{user}}"></user-avatar>
-    <div class="comment-main">
+    <div class="comment-main item-content">
       <div class="comment-info">
         <a href="/u/{{user.username}}">{{user.username}}</a>
         <time datetime="{{ comment.created_at }}">{{ comment.created_at | timeago }}</time>
@@ -57,11 +57,8 @@
   .comment-item {
     color: #565655;
     padding-top: 14px;
-    list-style-type: none;
-  }
-  .comment-item .comment-main {
-    overflow: hidden;
     padding-bottom: 10px;
+    list-style-type: none;
   }
   .comment-item .comment-info {
     position: relative;
@@ -88,10 +85,6 @@
     line-height: 1.4;
     font-size: 16px;
     margin-bottom: 10px;
-  }
-  .comment-item .avatar {
-    float: left;
-    margin-right: 12px;
   }
   .comment-content p {
     margin: 10px 0;

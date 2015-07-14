@@ -29,6 +29,9 @@
     },
     methods: {
       fetchUser: function(username) {
+        if (this.$root.currentUser.username === username) {
+          return this.user = this.$root.currentUser;
+        }
         api.user.profile(username, function(resp) {
           console.log(resp);
           this.user = resp;

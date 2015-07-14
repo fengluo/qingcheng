@@ -40,10 +40,18 @@ nav a:hover {
   margin-left: auto;
   margin-right: auto;
 }
-.container:after, .clearfix:after {
+.container:after, .clearfix:after, .item-container:after {
   content: '';
   display: table;
   clear: both;
+}
+
+.item-container .avatar {
+  float: left;
+  margin-right: 12px;
+}
+.item-container .item-content {
+  overflow: hidden;
 }
 
 /* layout: top-nav */
@@ -99,9 +107,11 @@ nav a:hover {
 .header-intro h2 {
   margin: 0;
   font-size: 24px;
+  line-height: 1;
 }
 .header-intro p {
   margin: 0;
+  line-height: 1.5;
 }
 .header-nav {
   background-color: white;
@@ -170,6 +180,7 @@ nav a:hover {
   font-size: 14px;
   margin-bottom: 1.2em;
 }
+
 /* widget */
 .widget {
   color: #999;
