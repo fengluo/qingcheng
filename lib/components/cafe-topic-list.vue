@@ -11,8 +11,12 @@
             <topic-item v-repeat="topic: topics" track-by="id"></topic-item>
           </ul>
           <logo-loading class="center" v-if="fetching"></logo-loading>
-          <div v-if="pagination">
-            <a v-if="pagination.next" href="/c/{{ cafe.slug }}?page={{ pagination.next }}">load more</a>
+          <div v-if="pagination" class="pagination clearfix">
+            <a class="pagination-prev" v-if="pagination.prev" href="/c/{{ cafe.slug }}?page={{ pagination.prev }}">Prev</a>
+            <span class="pagination-prev" v-if="!pagination.prev">Prev</span>
+
+            <a class="pagination-next" v-if="pagination.next" href="/c/{{ cafe.slug }}?page={{ pagination.next }}">Next</a>
+            <span class="pagination-next" v-if="!pagination.next">Next</span>
           </div>
         </div>
       </div>
@@ -45,7 +49,7 @@
   var api = require('../api');
   module.exports = {
     replace: true,
-    props: ['cafe', 'page'],
+    props: ['cafe', 'params'],
     data: function() {
       var showTopicForm = location.href.indexOf('?new') !== -1;
       return {
@@ -70,19 +74,20 @@
       }
     },
     watch: {
-      'cafe.slug': function(slug) {
-        if (!slug) return;
-        this.fetchTopics();
-      },
-      'page': function(page) {
-        this.fetchTopics(page);
+      'params': function(params) {
+        if (!params.slug) return;
+        this.fetchTopics(params.query.page);
       }
     },
     methods: {
       fetchTopics: function(page) {
         this.fetching = true;
         api.cafe.topics(this.cafe.slug, page, function(resp) {
-          this.pagination = resp.pagination;
+          if (resp.pagination.pages > 1) {
+            this.pagination = resp.pagination;
+          } else {
+            this.pagination = null;
+          }
           this.topics = resp.data;
           this.fetching = false;
         }.bind(this));
@@ -108,6 +113,26 @@
     margin-right: 12px;
   }
   .new-topic .yue {
+    color: #999;
+  }
+  .pagination {
+    padding: 5px 10px;
+  }
+  .pagination-prev {
+    float: left;
+  }
+  .pagination-next {
+    float: right;
+  }
+  .pagination a, .pagination span {
+    display: inline-block;
+    padding: 5px 14px;
+  }
+  .pagination a {
+    cursor: pointer;
+  }
+  .pagination span {
+    cursor: not-allowed;
     color: #999;
   }
 </style>

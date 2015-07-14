@@ -1,7 +1,7 @@
 <template>
   <cafe-header cafe="{{ cafe }}"></cafe-header>
   <component is="{{subview}}" v-if="cafe.slug"
-    cafe="{{cafe}}" page="{{page}}"
+    cafe="{{cafe}}" params="{{params}}"
     v-transition
     transition-mode="out-in">
   </component>
@@ -22,9 +22,6 @@
       subview: function() {
         return this.params.subview || 'cafe-topic-list';
       },
-      page: function() {
-        return this.params.query;
-      }
     },
     watch: {
       'params': function(obj) {
