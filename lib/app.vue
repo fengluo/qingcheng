@@ -10,8 +10,7 @@
           </div>
         </a>
         <nav>
-          <a class="brand" href="/c/site">Site</a>
-          <a class="brand" href="/c/about">About</a>
+          <a href="{{url}}" v-repeat="$site.links" v-text="name"></a>
         </nav>
       </div>
 
