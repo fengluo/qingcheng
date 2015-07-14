@@ -184,6 +184,7 @@ nav a:hover {
 /* widget */
 .widget {
   color: #999;
+  margin-bottom: 20px;
 }
 .widget h2, .widget h3, .widget h4 {
   margin: 0;
