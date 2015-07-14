@@ -8,7 +8,7 @@
       <div class="comment-list-header" v-if="comments.length">{{ topic.comment_count }} responses</div>
       <ul v-if="comments.length">
         <comment-item v-repeat="comment: comments" track-by="id"></comment-item>
-        <li class="more-comments" v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</li>
+        <li class="load-more" v-if="cursor" v-on="click: fetchComments(null, cursor)">Load More</li>
       </ul>
     </div>
   </div>
@@ -78,12 +78,9 @@
   .entry-view .container {
     max-width: 680px;
   }
-
   .comment-box {
     padding-bottom: 60px;
   }
-
-
   .comment-box ul {
     margin: 0;
     padding: 0;
@@ -95,17 +92,5 @@
     border-bottom: 1px solid #eee;
     text-transform: uppercase;
     font-size: 13px;
-  }
-  .comment-box .more-comments {
-    padding: 8px 0;
-    text-align: center;
-    color: #999;
-    margin-top: -1px;
-    background-color: #f0f0f0;
-    list-style-type: none;
-    cursor: pointer;
-  }
-  .comment-box .more-comments:hover {
-    background-color: #dadada;
   }
 </style>

@@ -251,3 +251,16 @@ a.button:hover, button:hover {
 .form-submit {
   padding-top: 20px;
 }
+
+/* load more button */
+.load-more {
+  padding: 8px 0;
+  text-align: center;
+  color: #999;
+  background-color: #f0f0f0;
+  list-style-type: none;
+  cursor: pointer;
+}
+.load-more:hover {
+  background-color: #dadada;
+}
