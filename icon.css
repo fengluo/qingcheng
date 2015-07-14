@@ -1,0 +1,88 @@
+@font-face {
+	font-family: 'qingcheng';
+	src:url('fonts/qingcheng.eot?-8cng5q');
+	src:url('fonts/qingcheng.eot?#iefix-8cng5q') format('embedded-opentype'),
+		url('fonts/qingcheng.ttf?-8cng5q') format('truetype'),
+		url('fonts/qingcheng.woff?-8cng5q') format('woff'),
+		url('fonts/qingcheng.svg?-8cng5q#qingcheng') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+i[class^=qc-icon] {
+	font-family: 'qingcheng';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.qc-icon-quill:before {
+	content: "\e907";
+}
+.qc-icon-image:before {
+	content: "\e90d";
+}
+.qc-icon-mic:before {
+	content: "\e91e";
+}
+.qc-icon-stack:before {
+	content: "\e92e";
+}
+.qc-icon-cog:before {
+	content: "\e994";
+}
+.qc-icon-bin:before {
+	content: "\e9ac";
+}
+.qc-icon-link:before {
+	content: "\e9cb";
+}
+.qc-icon-flag:before {
+	content: "\e9cc";
+}
+.qc-icon-bookmark:before {
+	content: "\e9d2";
+}
+.qc-icon-star-empty:before {
+	content: "\e9d7";
+}
+.qc-icon-star-full:before {
+	content: "\e9d9";
+}
+.qc-icon-heart:before {
+	content: "\e9da";
+}
+.qc-icon-heart-broken:before {
+	content: "\e9db";
+}
+.qc-icon-share:before {
+	content: "\ea7d";
+}
+.qc-icon-embed:before {
+	content: "\ea80";
+}
+.qc-icon-mail:before {
+	content: "\ea86";
+}
+.qc-icon-google:before {
+	content: "\ea87";
+}
+.qc-icon-facebook:before {
+	content: "\ea8c";
+}
+.qc-icon-twitter:before {
+	content: "\ea91";
+}
+.qc-icon-feed:before {
+	content: "\ea94";
+}
+.qc-icon-github:before {
+	content: "\eab4";
+}

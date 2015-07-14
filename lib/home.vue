@@ -13,7 +13,6 @@
         <nav>
           <a href="/">Overview</a>
           <a href="/c/">Cafes</a>
-          <a href="/u/">Members</a>
         </nav>
       </div>
     </div>
