@@ -192,6 +192,14 @@ a.button:hover, button:hover {
   background-color: white;
   cursor: pointer;
 }
+.overlay-mask:after {
+  content: 'x';
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  color: #ccc;
+  font: 500 24px/1 "Helvetica Neue", "Arial", sans-serif;
+}
 .overlay-inner {
   position: absolute;
   top: 0;
@@ -232,6 +240,7 @@ a.button:hover, button:hover {
   font-size: 18px;
   padding: 6px 2px;
   color: #454545;
+  background-color: transparent;
   font-family: "Source Sans Pro", "Lucida Grande", "Helvetica Neue", "Arial", sans-serif;
   transition: all 0.1s ease;
   box-sizing: border-box;
