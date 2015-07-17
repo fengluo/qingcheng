@@ -6,4 +6,11 @@ copy:
 build: copy
 	@node_modules/.bin/webpack
 
-.PHONY: build copy
+dist:
+	@mkdir -p dist/fonts
+	@node_modules/.bin/webpack
+	@cat icon.css build/style.css | cleancss -o dist/qingcheng.css
+	@cp fonts/* dist/fonts/
+	@uglifyjs build/build.js -m -o dist/qingcheng.js
+
+.PHONY: build copy dist

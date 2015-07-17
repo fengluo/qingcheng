@@ -15,7 +15,7 @@ var app = new WebpackDevServer(webpack(config), {
 
   proxy: {
     "/api/*": "http://localhost:5000",
-    "/session": "http://localhost:5000",
+    "/session*": "http://localhost:5000",
   }
 });
 

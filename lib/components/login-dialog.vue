@@ -25,7 +25,7 @@
 
         <form action="/session/new" method="post" v-on="submit: signup" v-show="!loginTab">
           <div class="form-field">
-            <input type="email" placeholder="Email" name="email" v-model="email" required v-el="email">
+            <input type="email" placeholder="Email" name="email" v-model="email" required>
           </div>
           <div class="form-submit">
             <button>Sign Up</button>
@@ -52,6 +52,7 @@
       return {
         username: '',
         password: '',
+        email: '',
         loginTab: true,
         error: false,
         permanent: true
@@ -60,6 +61,12 @@
     methods: {
       close: function() {
         this.$root.showLogin = false;
+      },
+      shakeError: function() {
+        this.error = true;
+        setTimeout(function() {
+          this.error = false;
+        }.bind(this), 1000);
       },
       login: function(e) {
         e.preventDefault();
@@ -70,16 +77,16 @@
         };
         api.user.login(data, function(resp) {
           this.close();
-        }.bind(this)).error(function() {
-          this.error = true;
-          // clear error
-          setTimeout(function() {
-            this.error = false;
-          }.bind(this), 1000);
-        }.bind(this));
+        }.bind(this)).error(this.shakeError.bind(this));
       },
       signup: function(e) {
         e.preventDefault();
+        api.user.signup(this.email, function(resp) {
+          this.$root.message.show('info', resp.message);
+        }.bind(this)).error(function(resp) {
+          this.$root.message.show('error', resp.error_form.email[0]);
+          this.shakeError();
+        }.bind(this));
       }
     },
     detached: function() {
