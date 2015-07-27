@@ -9,11 +9,10 @@
     props: ['user'],
     compiled: function() {
       var user = this.$data.user;
-      var span = '<span title="@#1" style="background-color:#2;">#3</span>';
+      var span = '<span style="background-color:#1;">#2</span>';
       span = span
-        .replace('#1', escape(user.username))
-        .replace('#2', wordColor(user.username))
-        .replace('#3', escape(user.username.charAt(0).toUpperCase()));
+        .replace('#1', wordColor(user.username))
+        .replace('#2', escape(user.username.charAt(0).toUpperCase()));
       var el = this.$$.el;
       el.innerHTML = span;
       if (!user.avatar_url) return;
@@ -24,7 +23,6 @@
       var img = new Image();
       img.src = user.avatar_url;
       img.alt = user.username;
-      img.title = '@' + user.username;
       img.onload = function() {
         el.innerHTML = '';
         el.appendChild(img);

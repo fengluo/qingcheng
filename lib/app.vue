@@ -20,7 +20,7 @@
         </div>
         <div class="site-account-inner" v-if="currentUser.username">
           <button class="circle" v-on="click: logout">Logout</button>
-          <user-avatar user="{{currentUser}}"></user-avatar>
+          <user-avatar user="{{currentUser}}" class="tip"></user-avatar>
         </div>
       </div>
     </div>

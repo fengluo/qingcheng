@@ -34,6 +34,48 @@ a.button:hover, button:hover {
   opacity: 0.8;
 }
 
+.tip {
+  position: relative;
+}
+.tip:before {
+  display: none;
+  position: absolute;
+  top: auto;
+  right: 50%;
+  bottom: -7px;
+  margin-right: -5px;
+  width: 0;
+  height: 0;
+  content: '';
+  border: 5px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  z-index: 10000;
+}
+.tip:after {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  padding: 2px 10px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  content: attr(aria-label);
+  white-space: pre;
+  z-index: 10000;
+  margin-top: 5px;
+  transform: translateX(50%);
+}
+a.tip:hover {
+  opacity: 1;
+}
+.tip:hover:before, .tip:hover:after {
+  opacity: 1;
+  display: inline-block;
+}
 /* cover */
 .cover {
   position: relative;
