@@ -1,5 +1,5 @@
 <template>
-  <a href="/u/{{user.username}}" v-el="el" class="avatar"></a>
+  <a href="/u/{{user.username}}" v-el="el" class="avatar" aria-label="View @{{user.username}} profile"></a>
 </template>
 <script>
   var escape = require('../utils').escape;

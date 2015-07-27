@@ -20,17 +20,19 @@
     <div class="container" v-if="topic">
       <h2 class="entry-title" v-if="!topicStyle">{{ topic.title }}</h2>
       <div class="entry-meta">
-        <a href="/c/{{ cafe.slug }}" title="Published in {{ cafe.name }}">
+        <a href="/c/{{ cafe.slug }}" aria-label="Published in {{ cafe.name }}">
           <span class="cafe-logo" v-style="cafeStyle"></span>
         </a>
         <time datetime="{{ topic.created_at }}" title="Updated at {{ topic.updated_at }}">{{ topic.created_at| timeago }}</time>
-        <a v-if="user" href="/u/{{ user.username }}" title="Published by @{{ user.username }}">@{{ user.username }}</a>
+        <a v-if="user" href="/u/{{ user.username }}" aria-label="Published by @{{ user.username }}">@{{ user.username }}</a>
       </div>
 
       <div class="entry-content yue" v-html="topic.content"></div>
 
       <div class="entry-actions clearfix">
-        <button class="white like-button" v-class="liked: topic.liked_by_me" v-on="click: toggleLike">
+        <span id="like-button-status" v-if="!topic.liked_by_me">Like this topic</span>
+        <span id="like-button-status" v-if="topic.liked_by_me">Toggle off like of this topic</span>
+        <button class="white like-button" v-class="liked: topic.liked_by_me" v-on="click: toggleLike" aria-labelledby="like-button-status">
           <i class="qc-icon-heart"></i>
           <span>Like it</span>
         </button>
@@ -94,7 +96,7 @@
         return this.topic.user;
       },
       canEdit: function() {
-        return this.topic.permission_edit;
+        return this.topic.permission.write;
       },
       topicStyle: function() {
         var cover = this.topic.info.cover;
@@ -281,5 +283,8 @@
     height: 48px;
     line-height: 48px;
     margin-right: 10px;
+  }
+  #like-button-status {
+    display: none;
   }
 </style>

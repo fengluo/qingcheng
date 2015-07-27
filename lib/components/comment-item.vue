@@ -7,8 +7,8 @@
         <time datetime="{{ comment.created_at }}">{{ comment.created_at | timeago }}</time>
         #{{ comment.id }}
         <div class="comment-actions">
-          <i role="button" class="qc-icon-flag" v-if="!isOwner" v-on="click: flagComment" aria-label="report spam" title="report spam"></i>
-          <i role="button" class="qc-icon-bin" v-if="isOwner" v-on="click: deleteComment" aria-label="delete comment"></i>
+          <a role="button" href="javascript:;" v-if="!isOwner" v-on="click: flagComment" aria-label="report spam"><i class="qc-icon-flag"></i></a>
+          <a role="button" href="javascript:;" v-if="isOwner" v-on="click: deleteComment" aria-label="delete comment"><i class="qc-icon-bin"></i></a>
         </div>
       </div>
       <div class="comment-content" v-html="comment.content"></div>
@@ -79,6 +79,7 @@
     opacity: 1;
   }
   .comment-item .comment-actions [role=button] {
+    color: #999;
     cursor: pointer;
   }
   .comment-item .comment-content {
