@@ -4,7 +4,7 @@
       <div class="main-view">
         <div v-if="canWrite" class="new-topic">
           <user-avatar user="{{ user }}" class="small circle"></user-avatar>
-          <span class="yue" role="button" v-on="click: showTopicForm=true">Create a new topic here</span>
+          <a href="javascript:;" role="button" v-on="click: showTopicForm=true">Create a new topic here</a>
         </div>
         <div class="topic-list">
           <ul>
@@ -112,7 +112,7 @@
   .new-topic .avatar {
     margin-right: 12px;
   }
-  .new-topic .yue {
+  .new-topic a {
     color: #999;
   }
   .pagination {

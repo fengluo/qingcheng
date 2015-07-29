@@ -2,7 +2,7 @@
   <form class="comment-form" v-on="submit: formSubmit" v-el="form">
     <div class="comment-form-mask" v-on="click: showLogin" v-if="!user.id"></div>
     <user-avatar user="{{ user }}" v-if="user.id" class="small circle"></user-avatar>
-    <textarea placeholder="Write your response" v-model='comment' v-on="keydown: keybordSubmit" v-class="active: comment.length"></textarea>
+    <textarea placeholder="Write your response" v-model='comment' v-on="keydown: keybordSubmit" v-class="active: comment.length" aria-label="Write your response"></textarea>
     <button v-if="user.id">Reply</button>
     <span class="comment-form-count" v-if="count" v-html="count"></span>
   </form>

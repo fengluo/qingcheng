@@ -11,7 +11,7 @@
           <a role="button" href="javascript:;" v-if="isOwner" v-on="click: deleteComment" aria-label="delete comment"><i class="qc-icon-bin"></i></a>
         </div>
       </div>
-      <div class="comment-content" v-html="comment.content"></div>
+      <div class="comment-content" v-html="content"></div>
     </div>
   </li>
 </template>
@@ -30,6 +30,11 @@
       },
       isHide: function() {
         return this.comment.flag_count > 5;
+      },
+      content: function() {
+        var content = this.comment.content;
+        content = content.replace(/(>|\s)@(\w+)/, '$1<a href="/u/$2">@$2<\/a>');
+        return content;
       }
     },
     methods: {

@@ -32,7 +32,7 @@
       <div class="entry-actions clearfix">
         <span id="like-button-status" v-if="!topic.liked_by_me">Like this topic</span>
         <span id="like-button-status" v-if="topic.liked_by_me">Toggle off like of this topic</span>
-        <button class="white like-button" v-class="liked: topic.liked_by_me" v-on="click: toggleLike" aria-labelledby="like-button-status">
+        <button class="white like-button" v-class="liked: topic.liked_by_me" v-on="click: toggleLike" aria-labelledby="like-button-status" aria-pressed="{{topic.liked_by_me|json}}">
           <i class="qc-icon-heart"></i>
           <span>Like it</span>
         </button>
