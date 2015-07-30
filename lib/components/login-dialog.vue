@@ -10,10 +10,10 @@
 
         <form action="/session" method="post" v-on="submit: login" v-show="loginTab">
           <div class="form-field">
-            <input type="text" placeholder="Username/Email" name="username" v-model="username" required v-el="username">
+            <input type="text" placeholder="Username/Email" aria-label="Username or Email" name="username" v-model="username" required v-el="username">
           </div>
           <div class="form-field">
-            <input type="password" placeholder="Password" name="password" v-model="password" required>
+            <input type="password" placeholder="Password" aria-label="Password" name="password" v-model="password" required>
           </div>
           <label class="form-check">
             <input type="checkbox" name="permanent" v-model="permanent">Remember Me
@@ -25,7 +25,7 @@
 
         <form action="/session/new" method="post" v-on="submit: signup" v-show="!loginTab">
           <div class="form-field">
-            <input type="email" placeholder="Email" name="email" v-model="email" required>
+            <input type="email" placeholder="Email" aria-label="Email" name="email" v-model="email" required>
           </div>
           <div class="form-submit">
             <button>Sign Up</button>

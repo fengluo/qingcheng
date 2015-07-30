@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <div id="message" v-if="messages.length" v-transition="fade">
+  <div id="message" aria-live="assertive">
     <div class="message message-{{type}}" v-repeat="messages" v-text="text" v-transition="fade"></div>
   </div>
   <login-dialog v-if="showLogin" v-transition="fade"></login-dialog>
