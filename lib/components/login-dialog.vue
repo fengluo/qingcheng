@@ -20,6 +20,7 @@
           </label>
           <div class="form-submit">
             <button>Log In</button>
+            <a href="/account/find-password">Find Password</a>
           </div>
         </form>
 
