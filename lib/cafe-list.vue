@@ -37,6 +37,7 @@ module.exports ={
       this.following = resp.following || [];
       this.cafes = this.cafes.concat(resp.data);
       this.cursor = resp.cursor;
+      ga('send', 'pageview', {title: 'Cafe List'});
     }.bind(this));
   },
   components: {

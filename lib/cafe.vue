@@ -36,7 +36,8 @@
         this.cafe = {slug: this.params.slug};
         api.cafe.view(this.params.slug, function(resp) {
           this.cafe = resp;
-          document.title = this.$site.name + ' — ' + this.cafe.name;
+          document.title = this.$site.name + ' — ' + resp.name;
+          ga('send', 'pageview', {title: resp.name});
         }.bind(this));
       }
     },
