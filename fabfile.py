@@ -17,9 +17,17 @@ def upload(filename):
     local('qboxrsctl put -c python qingcheng/%s %s' % (name, filename))
 
 
-def assets():
+def js():
     upload('dist/qingcheng.js')
+
+
+def css():
     upload('dist/qingcheng.css')
+
+
+def assets():
+    js()
+    css()
 
 
 def fonts():
